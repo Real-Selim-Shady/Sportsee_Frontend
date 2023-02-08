@@ -1,0 +1,34 @@
+.user-score{
+    width: 200px;
+    height: 200px;
+}
+
+.user-score-chart {
+    margin-top: -61px;
+    margin-left: -38px;
+    width: 291px; /*à intégrer à user-score*/
+    height: 340px; /*à intégrer à user-score*/
+}
+
+.score-title{
+    font-weight: 500;
+    font-size: 15px;
+    color: #20253A;
+    text-align: start;
+}
+
+.score-percentage{
+    font-weight: 700;
+    font-size: 26px;
+    color: #282D30;
+    margin-top: -124px;
+    margin-left: -66px;
+}
+
+.score-txt{
+    font-weight: 700;
+    font-size: 20px;
+    color: #74798C;
+    margin-top: -32px;
+    margin-left: -66px;
+}

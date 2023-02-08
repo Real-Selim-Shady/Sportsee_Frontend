@@ -1,0 +1,38 @@
+.user-weight-cal{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 310px;
+    padding-bottom: 50px;
+}
+
+.bar-kg{
+    fill:yellow;
+    border-radius: 50px;
+}
+
+.bar-cal{
+    stroke:blue;
+    border-radius: 50px;
+}
+
+.activity-chart-tooltip{
+    display: flex;
+    height: 45px;
+    width: 39px;
+    background-color: red;
+    color: white;
+    border: 1px solid transparent;
+    font-weight: 500;
+    font-size: 9px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px 5px;
+}
+
+
+
+.weight-cal-legend{
+    color: black;
+}

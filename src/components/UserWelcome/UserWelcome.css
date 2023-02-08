@@ -1,0 +1,23 @@
+.user-welcome{
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-title{
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.user-name{
+    color: red;
+    padding-left: 10px;
+}
+
+.welcome-congrats{
+    display: flex;
+    align-self: start;
+    font-size: 18px;
+    margin-top: -66px;
+    padding-left: 4px;
+}

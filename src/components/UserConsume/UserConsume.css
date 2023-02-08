@@ -1,0 +1,37 @@
+.user-consume{
+    display: flex;
+    flex-direction: column;
+    margin-top: 300px;
+}
+
+.user-consume-component{
+    display: flex;
+}
+
+.user-consume-img{
+    width: 60px;
+    height: 60px;
+}
+
+.user-consume-txt{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 17px;
+}
+
+.user-consume-num{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    position: relative;
+    top: -12px;
+}
+
+.user-consume-name{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    position: relative;
+    top: -47px;
+}
