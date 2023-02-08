@@ -5,15 +5,38 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } fro
 
 
 function UserPerf (props) {
+
+    /**
+     * Destructuring the useParams hook to retrieve the user id
+     */
     const params = useParams();
     const userId = params.id;
+
+    /**
+     * Parsing the user id from string to integer
+     * @type {number}
+     */
     let userIdNumber = parseInt(userId)
+
+    /**
+     * Retrieving the data source from the props
+     * @type {Array}
+     */
     const getData = props.dataSource;
     // The params and user id variables are used to retrieve the user's id stocked in the HTML, which is then parsed as an integer in the userIdNumber variable
     // The getData function is used to retrieve the data props, which are received from a parent element in the App file
 
+    /**
+     * The userData state that stores the user's session data
+     * @type {Array}
+     */
     const [userData, setUserData] = useState([]);
 
+    /**
+     * The useEffect hook that sets the userData state to the data from the data source
+     * userData is a state that receives its data via setUserData, provided that the received data is not "undefined"
+     * In the case of non-undefined data, the data from the props is sent to the state, otherwise, the string "false" is sent
+     */
     useEffect(()=>{
         const dataToUse = () => {
         if(getData !== undefined) {
@@ -28,9 +51,11 @@ function UserPerf (props) {
     },[userIdNumber, getData])
 
 
-    // userData is a state that receives its data via setUserData, provided that the received data is not "undefined"
-    // In the case of non-undefined data, the data from the props is sent to the state, otherwise, the string "false" is sent
-
+    /**
+     * Transforms the `kind` number into its corresponding string name
+     * @param {number} kind - The number representing the kind of performance data
+     * @return {string} The string name of the kind of performance data
+     */
     const radarKind = (kind) => {
         switch (kind){
             case 1: return "Cardio";
@@ -47,6 +72,12 @@ function UserPerf (props) {
 
     const perfData = userData?.data
 
+    /**
+     * Sorts the performance data array based on the `kind` property
+     * @param {Object} a - The first object in the array
+     * @param {Object} b - The second object in the array
+     * @return {number} The sort order of the two objects based on the `kind` property
+     */
     const sortData = (a, b) => {
         if (a.kind === 6) return -1;
         if (b.kind === 6) return 1;
@@ -69,7 +100,12 @@ function UserPerf (props) {
 
     // perfDataSorted takes both the data stored in the state and put in perfData const and the order we want from sortData
 
-
+    /**
+     * Renders the performance data in a radar chart
+     * If the state has stored the string "false", the user is redirected to the error page
+     * @param {object} userData - An object containing user's data
+     * @returns {JSX.Element} A React component representing the score chart or the error page
+     */
     if(userData !== "false"){
     return (
         <div className='user-perf'>
