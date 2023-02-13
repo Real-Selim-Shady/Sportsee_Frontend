@@ -1,7 +1,9 @@
 .user-average-session{
-    width: 346px;
-    background-color:red;
+    width: 258px;
+    height: 263px;
+    background-color: #FF0000;
     margin-right: 25px;
+    border-radius: 5px;
 }
 
 .average-session-tooltip{
@@ -13,9 +15,21 @@
 }
 
 .x-axis{
-    margin-top: 10px;
+    margin-top: 50px;
 }
 
 .user-as-title{
     color:rgba(255, 255, 255, 0.5);
+    display: flex;
+    padding-left: 26px;
+    text-align: start;
+    padding-top: 26px;
+}
+
+.line-chart-bloc{
+    margin-top: 40px;
+}
+
+.recharts-curve.recharts-tooltip-cursor{
+    stroke: transparent;
 }

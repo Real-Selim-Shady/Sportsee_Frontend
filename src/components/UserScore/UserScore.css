@@ -1,13 +1,22 @@
 .user-score{
-    width: 200px;
-    height: 200px;
+    width: 258px; /*à intégrer à user-score*/
+    height: 263px; /*à intégrer à user-score*/
+    background-color: #FBFBFB;
+    border-radius: 5px;
+}
+
+.score-txt-container{
+    z-index: 1;
+    position: absolute;
+    margin-top: -17px;
+    padding-left: 154px;
+    display: flex;
+    flex-direction: column;
 }
 
 .user-score-chart {
-    margin-top: -61px;
+    margin-top: -90px;
     margin-left: -38px;
-    width: 291px; /*à intégrer à user-score*/
-    height: 340px; /*à intégrer à user-score*/
 }
 
 .score-title{
@@ -15,9 +24,14 @@
     font-size: 15px;
     color: #20253A;
     text-align: start;
+    margin-bottom: -90px;
+    padding-top: 20px;
+    padding-left: 20px;
+
 }
 
 .score-percentage{
+    z-index: 1;
     font-weight: 700;
     font-size: 26px;
     color: #282D30;
@@ -26,9 +40,23 @@
 }
 
 .score-txt{
+    z-index: 1;
     font-weight: 700;
     font-size: 20px;
     color: #74798C;
     margin-top: -32px;
     margin-left: -66px;
+}
+
+.txt-background{
+    z-index: 0;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    margin-left: -100px;
+    margin-top: -154px;
+    border-radius: 50%;
+    width: 151px;
+    height: 151px;
 }

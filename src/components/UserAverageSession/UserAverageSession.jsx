@@ -22,15 +22,13 @@ function UserAverageSession (props) {
      * Parsing the user id from string to integer
      * @type {number}
      */
-    let userIdNumber = parseInt(userId)
+    let userIdNumber = parseInt(userId);
 
     /**
      * Retrieving the data source from the props
      * @type {Array}
      */
     const getData = props.dataSource;
-    // The params and user id variables are used to retrieve the user's id stocked in the HTML, which is then parsed as an integer in the userIdNumber variable
-    // The getData function is used to retrieve the data props, which are received from a parent element in the App file
 
     /**
      * The userData state that stores the user's session data
@@ -54,10 +52,10 @@ function UserAverageSession (props) {
         }
         };
         dataToUse();
-    },[userIdNumber, getData])
+    },[userIdNumber, getData]);
 
     /**
-     * A function that returns the average session tooltip
+     * A function that  displays a tooltip when a data point is active in the chart
      * @function
      * @param {Object} payload - The payload of the active data point 
      * @param {boolean} active - The state of the data point
@@ -72,12 +70,11 @@ function UserAverageSession (props) {
             )
         }
         return null
-    }
+    };
 
-    //tooltipAverageSession displays a tooltip when a data point is active in the chart
 
     /**
-     * An array that holds the week day abbreviations
+     * An array that holds the week day abbreviations along with two additional data points, one at the beginning and one at the end.
      * @type {Array}
      */
     const dayAbbreviations = ['','L', 'M', 'M', 'J', 'V', 'S', 'D', ''];
@@ -89,7 +86,7 @@ function UserAverageSession (props) {
     let sessions = [];
 
     /**
-     * Adding the user's sessions data to the sessions array if it exists
+     * Adding the user's sessions data to the added sessions, added to allow the graph to start and end at the extremities of its formatting, giving a continuity effect.
      */
     if(userData?.sessions){
         sessions=[...userData.sessions];
@@ -98,11 +95,8 @@ function UserAverageSession (props) {
         sessions.push(structuredClone(sessions[sessions.length-1]));
         sessions[sessions.length-1].day = 8;
         console.log("avereagesession data",sessions);
-    }
+    };
     
-    /* dayAbbreviations declares the weekdays along with two additional data points, one at the beginning and one at the end. 
-    The if statement will then declare a value to these added days. Adding these days will, 
-    through management of the X-axis padding, allow the graph to start and end at the extremities of its formatting, giving a continuity effect */
 
     /**
      * This component is used to display the average session duration for the user.
@@ -120,15 +114,15 @@ function UserAverageSession (props) {
     return (
         <div className='user-average-session'>
             <p className='user-as-title'>Durée moyenne des <br/> sessions</p>
-            <ResponsiveContainer width="100%" aspect={3}>
-                <LineChart width={300} height={100} data={sessions}>
+            <ResponsiveContainer width="100%" aspect={2} className="line-chart-bloc">
+                <LineChart width={100} height={100} data={sessions}>
                     <Tooltip
                     content={tooltipAverageSession}
                      />
                     <XAxis
                     className='x-axis' 
                     dataKey="day"
-                    padding={{ left: -40, right: -40 }}
+                    padding={{ left: -17, right: -17 }}
                     stroke="transparent"
                     axisLine={false} 
                     tick={{ fill: 'rgba(255, 255, 255, 0.5)' }}
@@ -139,15 +133,25 @@ function UserAverageSession (props) {
                      hide={true} 
                       />
                     <Line 
+                    className='chart-line'
                     type="monotone" 
                     dataKey="sessionLength" 
                     strokeWidth={2}
-                    stroke='rgba(255, 255, 255, 0.5)'
                     dot={false}
-                    activeDot={{
+                    activeDot={{  
                         stroke: 'rgba(255, 255, 255, 0.5)',
+                        strokeWidth: 7,
+                        r: 3
                     }}
+                    stroke={`url(#line-gradient)`}
                      />
+                    <defs>
+                        <linearGradient id="line-gradient" x1="0" y1="0" x2="3" y2="0">
+                            <stop offset="0 %" stopColor="rgba(255, 255, 255, 0.30)" />
+                            <stop offset="10%" stopColor="rgba(255, 255, 255, 0.50)" />
+                            <stop offset="30%" stopColor="rgba(255, 255, 255, 1.00)" />
+                        </linearGradient>
+                    </defs>
                 </LineChart>
             </ResponsiveContainer>
         </div>
@@ -159,7 +163,6 @@ function UserAverageSession (props) {
         )
     }
 
-    // If the state has stored the string "false", the user is redirected to the error page
 
 }
 

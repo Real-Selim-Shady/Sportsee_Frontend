@@ -10,6 +10,15 @@ import UserWelcome from '../../components/UserWelcome/UserWelcome';
 import Error from '../Error/Error';
 import { Routes, Route } from 'react-router-dom';
 
+
+
+/**
+ * @function App
+ * @description Main function of the SportSee application.
+ * This function uses React hooks to update the application state with user data.
+ * It also uses React Router DOM to display different pages of the application based on the URL.
+ * @returns {JSX.Element} Returns the component rendering in JSX format.
+ */
 function App() {
 
 

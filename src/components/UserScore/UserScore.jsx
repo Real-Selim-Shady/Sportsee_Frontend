@@ -23,8 +23,6 @@ function UserScore (props) {
      * @type {Array}
      */
     const getData = props.dataSource;
-    // The params and user id variables are used to retrieve the user's id stocked in the HTML, which is then parsed as an integer in the userIdNumber variable
-    // The getData function is used to retrieve the data props, which are received from a parent element in the App file
 
     /**
      * The userData state that stores the user's session data
@@ -84,24 +82,27 @@ function UserScore (props) {
     return (
         <div className='user-score'>
             <p className='score-title'>Score</p>
-            <ResponsiveContainer>
-                <RadialBarChart 
-                className='user-score-chart'
-                data={score} 
-                innerRadius="50%" 
-                startAngle={90} 
-                endAngle={450}
-                >
-                    <RadialBar 
-                    dataKey="todayScore" 
-                    barSize={9}
-                    cornerRadius="100%" />
-                </RadialBarChart>
-            </ResponsiveContainer>
-            <div>
+                <ResponsiveContainer width="130%" aspect={1}>
+                    <RadialBarChart 
+                    className='user-score-chart'
+                    data={score} 
+                    innerRadius="50%" 
+                    startAngle={90} 
+                    endAngle={450}
+                    >
+                        <RadialBar 
+                        dataKey="todayScore" 
+                        barSize={9}
+                        cornerRadius="100%"
+                         />
+                    </RadialBarChart>
+                </ResponsiveContainer>
+            <div className='score-txt-container'>
                 <p className='score-percentage'>{Math.round(userData?.todayScore * 100) || Math.round(userData?.score * 100)}%</p>
                 <p className='score-txt'>de votre <br/> objectif</p>
+                <div className='txt-background'></div>
             </div>
+
         </div>
     )}else{
         return(
@@ -110,8 +111,6 @@ function UserScore (props) {
         </div>
         )
     }
-
-    // If the state has stored the string "false", the user is redirected to the error page
 
 }
 

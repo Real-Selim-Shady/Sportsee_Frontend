@@ -81,7 +81,6 @@ function UserConsume (props) {
      * @constant {number} carbohydrateCountNum - User's lipid count.
      */
     const lipidCountNum = dataKey?.lipidCount;
-    // these constants retrieve specific data stored in the state
     
     /**
      * Renders the user consumption data 
@@ -142,8 +141,6 @@ function UserConsume (props) {
         </div>
         )
     }
-    
-    // If the state has stored the string "false", the user is redirected to the error page
 
 
 }

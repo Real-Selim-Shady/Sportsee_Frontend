@@ -1,22 +1,22 @@
 .user-weight-cal{
     display: flex;
     flex-direction: column;
-    width: 700px;
-    height: 310px;
+    width: 824px;
+    height: 345px;
     padding-bottom: 50px;
+    background-color: #FBFBFB;
+    border-radius: 5px;
 }
 
 .bar-kg{
-    fill:yellow;
     border-radius: 50px;
 }
 
 .bar-cal{
-    stroke:blue;
     border-radius: 50px;
 }
 
-.activity-chart-tooltip{
+.weightCal-chart-tooltip{
     display: flex;
     height: 45px;
     width: 39px;
@@ -35,4 +35,8 @@
 
 .weight-cal-legend{
     color: black;
+}
+
+.recharts-rectangle.recharts-tooltip-cursor{
+ fill: rgba(196, 196, 196, 0.5);   
 }

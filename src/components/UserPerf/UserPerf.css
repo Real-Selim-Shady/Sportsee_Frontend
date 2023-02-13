@@ -1,9 +1,11 @@
 .user-perf{
     width: 258px;
     height: 263px;
+    margin-right: 25px;
 }
 
 .radar-chart{
     background-color:#282D30;
     border-radius: 5px;
+    margin-top: 16px;
 }

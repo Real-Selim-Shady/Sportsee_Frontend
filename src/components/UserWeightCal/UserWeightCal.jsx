@@ -78,10 +78,11 @@ function UserWeightCal (props) {
     function tooltipWeightCal ({payload, active}) {
         if (active) {
             return (
-                <div className='activity-chart-tooltip'>
+                <div className='weightCal-chart-tooltip' style={{ borderBlockColor: "red", padding: "10px" }}>
                     <div>{`${payload[0].value}`}kg</div>
                     <div>{`${payload[1].value}`}Kcal</div>
                 </div>
+                
             )
         }
         return null
@@ -108,7 +109,7 @@ function UserWeightCal (props) {
                 
                 <CartesianGrid 
                 strokeDasharray="3 3"
-                vertical='false'
+                vertical={false}
                 height={1} 
                  />
 
@@ -140,7 +141,10 @@ function UserWeightCal (props) {
                 type="number"
                  />
 
-                <Tooltip content={tooltipWeightCal} />
+                <Tooltip 
+                content={tooltipWeightCal}
+                wrapperStyle={{ backgroundColor: "blue" }}
+                 />
 
                 <Legend
                 verticalAlign='top' 

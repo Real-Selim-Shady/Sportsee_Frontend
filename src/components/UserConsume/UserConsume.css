@@ -1,11 +1,22 @@
 .user-consume{
     display: flex;
     flex-direction: column;
-    margin-top: 300px;
+    margin-top: 216px;
+    margin-right: 10px;
+    height: 673px;
+    flex-wrap: nowrap;
+    place-content: space-between;
 }
 
 .user-consume-component{
     display: flex;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+    height: 62px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+    padding-left: 16px;
 }
 
 .user-consume-img{
