@@ -8,10 +8,17 @@
 
 .average-session-tooltip{
     background-color: white;
+    border-radius: 0;
     color: black;
     font-size: 11px;
     font-weight: 500;
 	padding: 4px 7px;
+    border:none;
+}
+
+.average-session-tooltip:focus{
+    outline: none;
+    border-radius: 0;
 }
 
 .x-axis{
@@ -33,3 +40,14 @@
 .recharts-curve.recharts-tooltip-cursor{
     stroke: transparent;
 }
+
+/*
+.recharts-tooltip-wrapper.recharts-tooltip-wrapper-right.recharts-tooltip-wrapper-bottom{
+    border: 2px dotted yellow;
+    border-radius: 50%;
+}
+
+.recharts-tooltip-wrapper.recharts-tooltip-wrapper-left.recharts-tooltip-wrapper-bottom{
+    border: 2px dotted yellow;
+    border-radius: 50%;
+}*/

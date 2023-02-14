@@ -22,12 +22,13 @@ import { Routes, Route } from 'react-router-dom';
 function App() {
 
 
+
+
   const [data, updateData] = useState([]);
 
   useEffect(() => {
-        updateData(mokedData);
-      }, []);
-
+    updateData(mokedData);
+  }, []);
 
   return (
       <Routes>
@@ -278,3 +279,23 @@ export default App;
       function MainCharts(props) {
   return <h1>Hello, {props.dataSource}</h1>;
   }*/
+
+  /*
+    useEffect(() => {
+        updateData(mokedData);
+      }, []);
+  */
+
+  /*
+    useEffect(() => {
+        fetch('http://localhost:3000/user/12')
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          updateData(data);
+        });
+      }, []);
+  */

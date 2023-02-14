@@ -147,7 +147,6 @@ function UserAverageSession (props) {
                      />
                     <defs>
                         <linearGradient id="line-gradient" x1="0" y1="0" x2="3" y2="0">
-                            <stop offset="0 %" stopColor="rgba(255, 255, 255, 0.30)" />
                             <stop offset="10%" stopColor="rgba(255, 255, 255, 0.50)" />
                             <stop offset="30%" stopColor="rgba(255, 255, 255, 1.00)" />
                         </linearGradient>
