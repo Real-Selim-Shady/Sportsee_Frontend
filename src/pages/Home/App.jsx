@@ -8,7 +8,7 @@ import UserScore from '../../components/UserScore/UserScore';
 import UserWeightCal from '../../components/UserWeightCal/UserWeightCal';
 import UserWelcome from '../../components/UserWelcome/UserWelcome';
 import Error from '../Error/Error';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 
 
 
@@ -22,13 +22,36 @@ import { Routes, Route } from 'react-router-dom';
 function App() {
 
 
+  /**
+ * Destructuring the useParams hook to retrieve the user id
+ */
+  const params = useParams();
+  const userId = params.id;
+
+  /**
+   * Parsing the user id from string to integer
+   * @type {number}
+   */
+  let userIdNumber = parseInt(userId);
+
+
 
 
   const [data, updateData] = useState([]);
 
+  /*useEffect(() => {
+    fetch("http://localhost:3000/user/"+12  )
+    .then(response => response.json())
+    .then(data => updateData(data));
+  }, []);*/
+
+  
   useEffect(() => {
     updateData(mokedData);
   }, []);
+  
+
+  console.log(data)
 
   return (
       <Routes>

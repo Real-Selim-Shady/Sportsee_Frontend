@@ -110,12 +110,12 @@ function UserPerf (props) {
     return (
         <div className='user-perf'>
             <ResponsiveContainer>
-                <RadarChart data={perfDataSorted} outerRadius={80} className="radar-chart" >
+                <RadarChart data={perfDataSorted} outerRadius={60} className="radar-chart" >
                     <PolarGrid radialLines={false} />
                     <PolarAngleAxis 
                         dataKey='kind' 
                         tickLine={false} 
-                        tick={{ fontSize: 12, fontWeight: 500 }} 
+                        tick={{ fontSize: 11, fontWeight: 400 }} 
                         stroke="#FFFFFF" 
                         tickFormatter={radarKind} />
                     <Radar dataKey='value' fill="#FF0101B2"/>

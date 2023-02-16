@@ -99,10 +99,10 @@ function UserWeightCal (props) {
     if(userData !== "false"){
     return (
         <div className='user-weight-cal'>
-            <ResponsiveContainer width="100%" aspect={2}>
+            <ResponsiveContainer width="98%" aspect={2} >
                 <BarChart
                 data={userData?.sessions}
-                margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
+                margin={{ top: 40, right: 35, bottom: 30, left: 35 }}
                 barGap={5}
                 barCategoryGap="37%"
                 >

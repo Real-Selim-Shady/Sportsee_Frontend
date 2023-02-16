@@ -1,6 +1,6 @@
 .user-score{
-    width: 258px; /*à intégrer à user-score*/
-    height: 263px; /*à intégrer à user-score*/
+    width: 200px; 
+    height: 210px; 
     background-color: #FBFBFB;
     border-radius: 5px;
 }
@@ -15,8 +15,8 @@
 }
 
 .user-score-chart {
-    margin-top: -90px;
-    margin-left: -38px;
+    margin-top: 25px;
+    margin-left: -31px;
 }
 
 .score-title{
@@ -33,30 +33,28 @@
 .score-percentage{
     z-index: 1;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 24px;
     color: #282D30;
-    margin-top: -124px;
-    margin-left: -66px;
+    margin-top: -93px;
+    margin-left: -107px;
 }
 
 .score-txt{
     z-index: 1;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 17px;
     color: #74798C;
-    margin-top: -32px;
-    margin-left: -66px;
+    margin-top: -23px;
+    margin-left: -110px;
 }
 
 .txt-background{
     z-index: 0;
     background-color: white;
-    width: 50px;
-    height: 50px;
     position: absolute;
-    margin-left: -100px;
-    margin-top: -154px;
+    margin-left: -112px;
+    margin-top: -120px;
     border-radius: 50%;
-    width: 151px;
-    height: 151px;
+    width: 114px;
+    height: 114px;
 }
