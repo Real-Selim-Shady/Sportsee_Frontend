@@ -17,7 +17,7 @@
 .App-header {
   background-color: black;
   display: flex;
-  height: 91px;
+  height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -46,8 +46,8 @@
   position: absolute;
   background-color: black;
   flex-direction: column;
-  margin-top: -12px;
-  padding-top: 250px;
+  margin-top: -4px;
+  padding-top: 207px;
   align-items: center;
 }
 
@@ -82,7 +82,7 @@
   display: flex;
   flex-direction: column;
   margin-right: 25px;
-  margin-top: -50px;
+  margin-top: -60px;
 }
 
 .bottom-content{
