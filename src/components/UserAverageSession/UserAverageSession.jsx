@@ -16,6 +16,7 @@ function UserAverageSession (props) {
      * Destructuring the useParams hook to retrieve the user id
      */
     const params = useParams();
+    console.log("params",params)
     const userId = params.id;
 
     /**

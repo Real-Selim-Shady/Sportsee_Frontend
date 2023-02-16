@@ -8,7 +8,8 @@ import UserScore from '../../components/UserScore/UserScore';
 import UserWeightCal from '../../components/UserWeightCal/UserWeightCal';
 import UserWelcome from '../../components/UserWelcome/UserWelcome';
 import Error from '../Error/Error';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { useParams, Routes, Route } from 'react-router-dom';
+import {getAPIUserDataMain, getAPIUserDataActivity, getAPIUserDataAverage, getAPIUserDataPerformance} from '../../services/ApiCalls';
 
 
 
@@ -23,35 +24,44 @@ function App() {
 
 
   /**
- * Destructuring the useParams hook to retrieve the user id
- */
-  const params = useParams();
-  const userId = params.id;
+   * Destructuring the useParams hook to retrieve the user id
+   */
+  const { id } = useParams();
+  console.log("params2",id);
 
   /**
    * Parsing the user id from string to integer
    * @type {number}
    */
-  let userIdNumber = parseInt(userId);
+  let userId = parseInt(id);
 
 
+  const [mockedData, updateData] = useState([]);
+  const [userData, setUserData] = useState();
+  const [userActivity, setUserActivity] = useState();
+  const [userSessionDuration, setUserSessionDuration] = useState();
+  const [userPerformance, setUserPerformance] = useState();
 
+  useEffect(()=>{
+    getAPIUserDataMain(userId)
+    .then(data => setUserData(data));
 
-  const [data, updateData] = useState([]);
+    getAPIUserDataActivity(userId)
+        .then((data) => setUserActivity(data));
 
-  /*useEffect(() => {
-    fetch("http://localhost:3000/user/"+12  )
-    .then(response => response.json())
-    .then(data => updateData(data));
-  }, []);*/
+    getAPIUserDataAverage(userId)
+        .then((data) => setUserSessionDuration(data));
 
-  
-  useEffect(() => {
+    getAPIUserDataPerformance(userId)
+        .then((data) => setUserPerformance(data));
+
     updateData(mokedData);
-  }, []);
-  
+  },[userId])
 
-  console.log(data)
+  console.log("userData",userData)
+  console.log("userActivity",userActivity)
+  console.log("userSessionDuration",userSessionDuration)
+  console.log("userPerformance",userPerformance)
 
   return (
       <Routes>
@@ -75,28 +85,28 @@ function App() {
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
-                    <UserWelcome dataSource = {data.USER_MAIN_DATA} />
+                    <UserWelcome dataSource = {mockedData.USER_MAIN_DATA} />
                   </div>
                   <div className='first-chart'>
                     <section>
-                      <UserWeightCal dataSource = {data.USER_ACTIVITY} />
+                      <UserWeightCal dataSource = {mockedData.USER_ACTIVITY} />
                     </section>
                   </div>
                   <div className='bottom-content'>
                     <section>
-                      <UserAverageSession dataSource = {data.USER_AVERAGE_SESSIONS} />
+                      <UserAverageSession dataSource = {mockedData.USER_AVERAGE_SESSIONS} />
                     </section>
                     <section>
-                      <UserPerf dataSource = {data.USER_PERFORMANCE} />
+                      <UserPerf dataSource = {mockedData.USER_PERFORMANCE} />
                     </section>
                     <section>
-                      <UserScore dataSource = {data.USER_MAIN_DATA} />
+                      <UserScore dataSource = {mockedData.USER_MAIN_DATA} />
                     </section>
                   </div>
                 </section>
                 <aside>
                   <section>
-                    <UserConsume dataSource = {data.USER_MAIN_DATA} />
+                    <UserConsume dataSource = {mockedData.USER_MAIN_DATA} />
                   </section>
                 </aside>
               </div>
@@ -177,17 +187,17 @@ function App() {
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
-                    <UserWelcome dataSource = {data.USER_MAIN_DATA} />
+                    <UserWelcome dataSource = {mockedData.USER_MAIN_DATA} />
                   </div>
                   <div className='first-chart'>
                     <section>
-                      <UserWeightCal dataSource = {data.USER_ACTIVITY} />
+                      <UserWeightCal dataSource = {mockedData.USER_ACTIVITY} />
                     </section>
                   </div>
                 </section>
                 <aside>
                   <section>
-                    <UserConsume dataSource = {data.USER_MAIN_DATA} />
+                    <UserConsume dataSource = {mockedData.USER_MAIN_DATA} />
                   </section>
                 </aside>
               </div>
@@ -214,11 +224,11 @@ function App() {
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
-                    <UserWelcome dataSource = {data.USER_MAIN_DATA} />
+                    <UserWelcome dataSource = {mockedData.USER_MAIN_DATA} />
                   </div>
                   <div className='bottom-content'>
                     <section>
-                      <UserPerf dataSource = {data.USER_PERFORMANCE} />
+                      <UserPerf dataSource = {mockedData.USER_PERFORMANCE} />
                     </section>
                   </div>
                 </section>
@@ -246,11 +256,11 @@ function App() {
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
-                    <UserWelcome dataSource = {data.USER_MAIN_DATA} />
+                    <UserWelcome dataSource = {mockedData.USER_MAIN_DATA} />
                   </div>
                   <div className='bottom-content'>
                     <section>
-                      <UserAverageSession dataSource = {data.USER_AVERAGE_SESSIONS} />
+                      <UserAverageSession dataSource = {mockedData.USER_AVERAGE_SESSIONS} />
                     </section>
                   </div>
                 </section>
@@ -278,11 +288,11 @@ function App() {
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
-                    <UserWelcome dataSource = {data.USER_MAIN_DATA} />
+                    <UserWelcome dataSource = {mockedData.USER_MAIN_DATA} />
                   </div>
                   <div className='bottom-content'>
                     <section>
-                      <UserScore dataSource = {data.USER_MAIN_DATA} />
+                      <UserScore dataSource = {mockedData.USER_MAIN_DATA} />
                     </section>
                   </div>
                 </section>
@@ -309,16 +319,9 @@ export default App;
       }, []);
   */
 
-  /*
-    useEffect(() => {
-        fetch('http://localhost:3000/user/12')
-        .then((response) => {
-          console.log(response);
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          updateData(data);
-        });
-      }, []);
-  */
+
+  /*useEffect(() => {
+    fetch("http://localhost:3000/user/${userIdNumber}"  )
+    .then(response => response.json())
+    .then(data => updateData(data));
+  }, []);*/
