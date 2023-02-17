@@ -2,6 +2,7 @@ import './UserAverageSession.css';
 import { useParams, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { getAPIUserAverageSession } from '../../services/ApiCalls';
 
 
 /**
@@ -36,6 +37,7 @@ function UserAverageSession (props) {
      * @type {Array}
      */
     const [userData, setUserData] = useState([]);
+    //const [userSessionDuration, setUserSessionDuration] = useState();
 
     /**
      * The useEffect hook that sets the userData state to the data from the data source
@@ -45,9 +47,12 @@ function UserAverageSession (props) {
     useEffect(()=>{
         const dataToUse = () => {
         if(getData !== undefined) {
-            const element = getData.find((data) => data.userId === userIdNumber);
-            setUserData(element);
-            if(element === undefined) {
+            getAPIUserAverageSession(userIdNumber)
+            .then((data) => setUserData(data));
+            //const element = getData.find((data) => data.userId === userIdNumber);
+            //setUserData(element);
+            if(getData /*if mockedData, change getData to element*/ === undefined) {
+                console.log("REPEREEEEEEE")
             setUserData("false")
             }
         }

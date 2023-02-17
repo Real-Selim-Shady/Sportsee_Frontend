@@ -9,7 +9,6 @@ import UserWeightCal from '../../components/UserWeightCal/UserWeightCal';
 import UserWelcome from '../../components/UserWelcome/UserWelcome';
 import Error from '../Error/Error';
 import { useParams, Routes, Route } from 'react-router-dom';
-import {getAPIUserDataMain, getAPIUserDataActivity, getAPIUserDataAverage, getAPIUserDataPerformance} from '../../services/ApiCalls';
 
 
 
@@ -37,31 +36,10 @@ function App() {
 
 
   const [mockedData, updateData] = useState([]);
-  const [userData, setUserData] = useState();
-  const [userActivity, setUserActivity] = useState();
-  const [userSessionDuration, setUserSessionDuration] = useState();
-  const [userPerformance, setUserPerformance] = useState();
 
   useEffect(()=>{
-    getAPIUserDataMain(userId)
-    .then(data => setUserData(data));
-
-    getAPIUserDataActivity(userId)
-        .then((data) => setUserActivity(data));
-
-    getAPIUserDataAverage(userId)
-        .then((data) => setUserSessionDuration(data));
-
-    getAPIUserDataPerformance(userId)
-        .then((data) => setUserPerformance(data));
-
     updateData(mokedData);
   },[userId])
-
-  console.log("userData",userData)
-  console.log("userActivity",userActivity)
-  console.log("userSessionDuration",userSessionDuration)
-  console.log("userPerformance",userPerformance)
 
   return (
       <Routes>

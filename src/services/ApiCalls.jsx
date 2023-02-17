@@ -12,20 +12,20 @@ function getAPIUserData(uri){
         .then(response => response.data)
 }
 
-function getAPIUserDataMain(userId){
+function getAPIUserMainData(userId){
     return getAPIUserData('user/' + userId)
 }
 
-function getAPIUserDataActivity(userId){
+function getAPIUserActivity(userId){
     return getAPIUserData('user/' + userId + '/activity')
 }
 
-function getAPIUserDataAverage(userId){
+function getAPIUserAverageSession(userId){
     return getAPIUserData('user/' + userId + '/average-sessions')
 }
 
-function getAPIUserDataPerformance(userId){
+function getAPIUserPerformance(userId){
     return getAPIUserData('user/' + userId + '/performance')
 }
 
-export {getAPIUserDataMain, getAPIUserDataActivity, getAPIUserDataAverage, getAPIUserDataPerformance}
+export {getAPIUserMainData, getAPIUserActivity, getAPIUserAverageSession, getAPIUserPerformance}

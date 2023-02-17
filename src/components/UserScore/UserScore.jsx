@@ -2,6 +2,7 @@ import './UserScore.css';
 import { useParams, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
+import { getAPIUserMainData } from '../../services/ApiCalls';
 
 
 function UserScore (props) {
@@ -38,15 +39,19 @@ function UserScore (props) {
     useEffect(()=>{
         const dataToUse = () => {
         if(getData !== undefined) {
-            const element = getData.find((data) => data.id === userIdNumber);
-            setUserData(element);
-            if(element === undefined) {
+            getAPIUserMainData(userIdNumber)
+            .then((data) => setUserData(data))
+            //const element = getData.find((data) => data.id === userIdNumber);
+            //setUserData(element); //use this if working with mockedData
+            if(getData /* use element instead of getDat if you want to work with mockedData */ === undefined) {
             setUserData("false")
             }
         }
         };
         dataToUse();
     },[userIdNumber, getData])
+    console.log("USER ID", userId)
+    console.log("")
 
     /**
      * An array that contains two objects representing the user's score information

@@ -2,6 +2,7 @@ import './UserPerf.css';
 import { useParams, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from "recharts";
+import { getAPIUserPerformance } from '../../services/ApiCalls';
 
 
 function UserPerf (props) {
@@ -40,9 +41,11 @@ function UserPerf (props) {
     useEffect(()=>{
         const dataToUse = () => {
         if(getData !== undefined) {
-            const element = getData.find((data) => data.userId === userIdNumber);
-            setUserData(element);
-            if(element === undefined) {
+            getAPIUserPerformance(userIdNumber)
+            .then((data) => setUserData(data));
+            //const element = getData.find((data) => data.userId === userIdNumber);
+            //setUserData(element); //use this if working with mockedData
+            if(getData /* use element instead of getDat if you want to work with mockedData */ === undefined) {
             setUserData("false")
             }
         }

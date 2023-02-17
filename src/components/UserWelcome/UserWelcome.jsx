@@ -1,6 +1,7 @@
 import { useParams, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import './UserWelcome.css';
+import { getAPIUserMainData } from '../../services/ApiCalls';
 
 
 function UserWelcome (props) {
@@ -39,15 +40,19 @@ function UserWelcome (props) {
   useEffect(()=>{
     const dataToUse = () => {
       if(getData !== undefined) {
-        const element = getData.find((data) => data.id === userIdNumber);
-        setUserData(element);
-        if(element === undefined) {
+        getAPIUserMainData(userIdNumber)
+        .then((data) => setUserData(data))
+          //const element = getData.find((data) => data.id === userIdNumber);
+          //setUserData(element); //use this if working with mockedData
+        if(userData?.userInfos?.firstName /* use element instead of getDat if you want to work with mockedData */ === undefined) {
           setUserData("false")
         }
       }
     };
     dataToUse();
-  },[userIdNumber, getData])
+  },[userIdNumber, getData, userData?.userInfos?.firstName])
+
+  console.log("ERROR?", userData)
 
   /**
    * Renders the welcome message with user's name

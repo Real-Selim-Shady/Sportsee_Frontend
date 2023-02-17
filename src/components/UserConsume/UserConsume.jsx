@@ -1,6 +1,7 @@
 import './UserConsume.css';
 import { useParams, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { getAPIUserMainData } from '../../services/ApiCalls';
 
 /**
  * UserConsume component, used to display the user's consumption data.
@@ -45,9 +46,11 @@ function UserConsume (props) {
     useEffect(()=>{
         const dataToUse = () => {
         if(getData !== undefined) {
-            const element = getData.find((data) => data.id === userIdNumber);
-            setUserData(element);
-            if(element === undefined) {
+            getAPIUserMainData(userIdNumber)
+            .then((data) => setUserData(data));
+            //const element = getData.find((data) => data.id === userIdNumber);
+            //setUserData(element);
+            if(getData /*if mockedData, change getData to element*/ === undefined) {
             setUserData("false")
             }
         }

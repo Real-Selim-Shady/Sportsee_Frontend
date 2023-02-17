@@ -2,6 +2,7 @@ import './UserWeightCal.css';
 import { useParams, Navigate } from 'react-router-dom';
 import React, { useState, useEffect/*, PureComponent*/ } from 'react';
 import { BarChart, Bar, /*Cell,*/XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { getAPIUserActivity } from '../../services/ApiCalls';
 
 function UserWeightCal (props) {
 
@@ -39,9 +40,11 @@ function UserWeightCal (props) {
     useEffect(()=>{
         const dataToUse = () => {
         if(getData !== undefined) {
-            const element = getData.find((data) => data.userId === userIdNumber);
-            setUserData(element);
-            if(element === undefined) {
+            getAPIUserActivity(userIdNumber)
+            .then((data) => setUserData(data));
+            //const element = getData.find((data) => data.userId === userIdNumber);
+            //setUserData(element); //use this if working with mockedData
+            if(getData /* use element instead of getDat if you want to work with mockedData */ === undefined) {
             setUserData("false")
             }
         }
@@ -57,7 +60,9 @@ function UserWeightCal (props) {
      * @returns {number} The day of the month in the date value
      */
     const dayFormat = (value) => {
-        const valueDay = value.split('-')
+        console.log(value.toString())
+        const valueString = value.toString()
+        const valueDay = valueString.split('-')
         
         return (Number(valueDay[2]))
     }
