@@ -31,6 +31,7 @@ function UserWelcome (props) {
    * @type {Array}
    */
   const [userData, setUserData] = useState([]);
+  const [idChecker, setIdChecker] = useState([]);
 
   /**
    * The useEffect hook that sets the userData state to the data from the data source
@@ -42,17 +43,18 @@ function UserWelcome (props) {
       if(getData !== undefined) {
         getAPIUserMainData(userIdNumber)
         .then((data) => setUserData(data))
-          //const element = getData.find((data) => data.id === userIdNumber);
-          //setUserData(element); //use this if working with mockedData
-        if(userData?.userInfos?.firstName /* use element instead of getDat if you want to work with mockedData */ === undefined) {
-          setUserData("false")
-        }
+      }
+    };
+    const idCheckerFunction = () => {
+      if(getData !== undefined) {
+        getAPIUserMainData(userIdNumber)
+        .then((data) => setIdChecker(data.id))
+        .catch(error => setIdChecker("false"))
       }
     };
     dataToUse();
-  },[userIdNumber, getData, userData?.userInfos?.firstName])
-
-  console.log("ERROR?", userData)
+    idCheckerFunction();
+  },[userIdNumber, getData])
 
   /**
    * Renders the welcome message with user's name
@@ -60,7 +62,7 @@ function UserWelcome (props) {
    * @param {object} userData - An object containing user's data
    * @returns {JSX.Element} A React component representing the score chart or the error page
    */
-  if(userData !== "false"){
+  if(idChecker !== "false"){
   return (
       <div className='user-welcome'>
         <h1 className='welcome-title'>Bonjour<p className='user-name'>{userData?.userInfos?.firstName}</p></h1>

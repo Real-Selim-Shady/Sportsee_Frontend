@@ -31,7 +31,8 @@ function UserPerf (props) {
      * The userData state that stores the user's session data
      * @type {Array}
      */
-    const [userData, setUserData] = useState([]);
+    const [userData, setUserData] = useState(["before set"]);
+    const [idChecker, setIdChecker] = useState([]);
 
     /**
      * The useEffect hook that sets the userData state to the data from the data source
@@ -39,19 +40,36 @@ function UserPerf (props) {
      * In the case of non-undefined data, the data from the props is sent to the state, otherwise, the string "false" is sent
      */
     useEffect(()=>{
-        const dataToUse = () => {
+      const dataToUse = () => {
         if(getData !== undefined) {
             getAPIUserPerformance(userIdNumber)
-            .then((data) => setUserData(data));
-            //const element = getData.find((data) => data.userId === userIdNumber);
-            //setUserData(element); //use this if working with mockedData
-            if(getData /* use element instead of getDat if you want to work with mockedData */ === undefined) {
-            setUserData("false")
-            }
+          .then((data) => setUserData(data))
         }
-        };
-        dataToUse();
+      };
+      const idCheckerFunction = () => {
+        if(getData !== undefined) {
+            getAPIUserPerformance(userIdNumber)
+          .then((data) => setIdChecker(data.id))
+          .catch(error => setIdChecker("false"))
+        }
+      };
+      dataToUse();
+      idCheckerFunction();
     },[userIdNumber, getData])
+
+    
+    /*useEffect(()=>{
+    const dataToUse = () => {
+    if(getData !== undefined) {
+        const element = getData.find((data) => data.userId === userIdNumber);
+        setUserData(element); 
+        if(element === undefined) {
+        setUserData("false")
+        }
+    }
+    };
+    dataToUse();
+    },[userIdNumber, getData])*/
 
 
     /**
@@ -109,7 +127,9 @@ function UserPerf (props) {
      * @param {object} userData - An object containing user's data
      * @returns {JSX.Element} A React component representing the score chart or the error page
      */
-    if(userData !== "false"){
+    if(idChecker !== "false"){
+    //const perfDataFiltered = perfDataSorted?.filter(data => typeof data.value === 'number' && !isNaN(data.value));
+    if(userData[0] === "before set") { return null} else {
     return (
         <div className='user-perf'>
             <ResponsiveContainer>
@@ -125,7 +145,7 @@ function UserPerf (props) {
                 </RadarChart> 
             </ResponsiveContainer>
         </div>
-    )}else{
+    )}}else{
         return(
         <div>
             <Navigate replace to="/Error404" />
@@ -138,3 +158,18 @@ function UserPerf (props) {
 }
 
 export default UserPerf
+
+
+/*
+useEffect(()=>{
+    const dataToUse = () => {
+    if(getData !== undefined) {
+        const element = getData.find((data) => data.userId === userIdNumber);
+        setUserData(element); 
+        if(element === undefined) {
+        setUserData("false")
+        }
+    }
+    };
+    dataToUse();
+},[userIdNumber, getData])*/

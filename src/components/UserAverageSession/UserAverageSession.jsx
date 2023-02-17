@@ -17,7 +17,6 @@ function UserAverageSession (props) {
      * Destructuring the useParams hook to retrieve the user id
      */
     const params = useParams();
-    console.log("params",params)
     const userId = params.id;
 
     /**
@@ -52,7 +51,6 @@ function UserAverageSession (props) {
             //const element = getData.find((data) => data.userId === userIdNumber);
             //setUserData(element);
             if(getData /*if mockedData, change getData to element*/ === undefined) {
-                console.log("REPEREEEEEEE")
             setUserData("false")
             }
         }
@@ -100,7 +98,6 @@ function UserAverageSession (props) {
         sessions[0].day = 0;
         sessions.push(structuredClone(sessions[sessions.length-1]));
         sessions[sessions.length-1].day = 8;
-        console.log("avereagesession data",sessions);
     };
     
 

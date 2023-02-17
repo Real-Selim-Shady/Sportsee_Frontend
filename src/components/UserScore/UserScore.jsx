@@ -50,8 +50,6 @@ function UserScore (props) {
         };
         dataToUse();
     },[userIdNumber, getData])
-    console.log("USER ID", userId)
-    console.log("")
 
     /**
      * An array that contains two objects representing the user's score information

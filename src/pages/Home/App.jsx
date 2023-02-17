@@ -26,7 +26,6 @@ function App() {
    * Destructuring the useParams hook to retrieve the user id
    */
   const { id } = useParams();
-  console.log("params2",id);
 
   /**
    * Parsing the user id from string to integer

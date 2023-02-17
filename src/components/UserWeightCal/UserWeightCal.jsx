@@ -60,7 +60,6 @@ function UserWeightCal (props) {
      * @returns {number} The day of the month in the date value
      */
     const dayFormat = (value) => {
-        console.log(value.toString())
         const valueString = value.toString()
         const valueDay = valueString.split('-')
         
