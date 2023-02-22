@@ -1,62 +1,39 @@
 import './UserAverageSession.css';
-import { useParams, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { getAPIUserAverageSession } from '../../services/ApiCalls';
+import PropTypes from 'prop-types';
 
 
-/**
- * A function that displays the average session duration of a user in a line chart
- * @function
- * @param {Object} props - The properties passed to the function
- * @property {Array} props.dataSource - The data source of the user's sessions 
- */
 function UserAverageSession (props) {
 
     /**
-     * Destructuring the useParams hook to retrieve the user id
-     */
-    const params = useParams();
-    const userId = params.id;
-
-    /**
-     * Parsing the user id from string to integer
-     * @type {number}
-     */
-    let userIdNumber = parseInt(userId);
-
-    /**
-     * Retrieving the data source from the props
+     * @description Retrieving the data source from the props
+     * dataSource provides data used for the chart, idChecker provides id check
      * @type {Array}
      */
     const getData = props.dataSource;
+    const getIdChecker = props.idChecker;
+
 
     /**
      * The userData state that stores the user's session data
      * @type {Array}
      */
-    const [userData, setUserData] = useState([]);
-    //const [userSessionDuration, setUserSessionDuration] = useState();
+    const [userData, setUserData] = useState();
 
     /**
      * The useEffect hook that sets the userData state to the data from the data source
-     * userData is a state that receives its data via setUserData, provided that the received data is not "undefined"
-     * In the case of non-undefined data, the data from the props is sent to the state, otherwise, the string "false" is sent
+     * userData is a state that receives its data via setUserData
      */
     useEffect(()=>{
         const dataToUse = () => {
-        if(getData !== undefined) {
-            getAPIUserAverageSession(userIdNumber)
-            .then((data) => setUserData(data));
-            //const element = getData.find((data) => data.userId === userIdNumber);
-            //setUserData(element);
-            if(getData /*if mockedData, change getData to element*/ === undefined) {
-            setUserData("false")
-            }
-        }
+          if(getData !== undefined) {
+              setUserData(getData)
+          }
         };
         dataToUse();
-    },[userIdNumber, getData]);
+      },[getData])
 
     /**
      * A function that  displays a tooltip when a data point is active in the chart
@@ -103,17 +80,16 @@ function UserAverageSession (props) {
 
     /**
      * This component is used to display the average session duration for the user.
-     * If the userData is not equal to false, the component will render a line chart using the sessions data.
+     * If the state idChecker has stored the string "false", the user is redirected to the error page
      * The chart will show the session duration on the Y-axis and the days on the X-axis.
-     * The tooltip will display the average session duration.
-     * If userData is equal to false, the component will redirect the user to the Error404 page.
+     * The tooltip will display the session duration.
      * @component
      * @param {string} userData - The data of the user.
      * @param {Array} sessions - An array of objects that contains the session data.
      * @param {Function} tooltipAverageSession - A function that returns the content for the tooltip.
      * @param {Object} dayAbbreviations - An object that contains the abbreviations for the days.
      */
-    if(userData !== "false"){
+    if(getIdChecker !== 0){
     return (
         <div className='user-average-session'>
             <p className='user-as-title'>Durée moyenne des <br/> sessions</p>
@@ -160,12 +136,24 @@ function UserAverageSession (props) {
     )}else{
         return(
         <div>
-            <Navigate replace to="/Error404" />
+            <Navigate replace to="/user/404/Error" />
         </div>
         )
     }
 
-
 }
+
+
+UserAverageSession.propTypes = {
+    dataSource: PropTypes.shape({
+      sessions: PropTypes.arrayOf(
+        PropTypes.shape({
+          day: PropTypes.number.isRequired,
+          sessionLength: PropTypes.number.isRequired,
+        })
+      ),
+    }),
+    idChecker: PropTypes.number,
+  };
 
 export default UserAverageSession

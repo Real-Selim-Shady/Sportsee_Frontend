@@ -1,97 +1,75 @@
 import './UserConsume.css';
-import { useParams, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { getAPIUserMainData } from '../../services/ApiCalls';
+import PropTypes from 'prop-types';
 
-/**
- * UserConsume component, used to display the user's consumption data.
- * @function
- * @param {object} props - Props received from the parent component.
- * @param {object[]} props.dataSource - Data source for user consumption.
- * @returns {JSX.Element} - JSX component for the user's consumption data.
- */
 function UserConsume (props) {
 
     /**
-     * Destructuring the useParams hook to retrieve the user id
-     */
-    const params = useParams();
-    const userId = params.id;
-
-    /**
-     * Parsing the user id from string to integer
-     * @type {number}
-     */
-    let userIdNumber = parseInt(userId)
-
-    /**
-     * Retrieving the data source from the props
+     * @description Retrieving the data source from the props
+     * dataSource provides data used for the chart, idChecker provides id check
      * @type {Array}
      */
     const getData = props.dataSource;
-    // The params and user id variables are used to retrieve the user's id stocked in the HTML, which is then parsed as an integer in the userIdNumber variable
-    // The getData function is used to retrieve the data props, which are received from a parent element in the App file
+    const getIdChecker = props.idChecker;
 
     /**
-     * The userData state that stores the user's session data
+     * @description The userData state that stores the user's session data
      * @type {Array}
      */
-    const [userData, setUserData] = useState([]);
+    const [userData, setUserData] = useState();
 
     /**
-     * The useEffect hook that sets the userData state to the data from the data source
-     * userData is a state that receives its data via setUserData, provided that the received data is not "undefined"
-     * In the case of non-undefined data, the data from the props is sent to the state, otherwise, the string "false" is sent
+     * @description The useEffect hook that sets the userData state to the data from the data source
+     * userData is a state that receives its data via setUserData
      */
     useEffect(()=>{
         const dataToUse = () => {
-        if(getData !== undefined) {
-            getAPIUserMainData(userIdNumber)
-            .then((data) => setUserData(data));
-            //const element = getData.find((data) => data.id === userIdNumber);
-            //setUserData(element);
-            if(getData /*if mockedData, change getData to element*/ === undefined) {
-            setUserData("false")
-            }
-        }
+          if(getData !== undefined) {
+              setUserData(getData)
+          }
         };
         dataToUse();
-    },[userIdNumber, getData])
+      },[getData])
 
 
     /**
-     * Store the key data for the user's consumption.
+     * @description Store the key data for the user's consumption.
      * @constant {object} dataKey - Key data for the user's consumption.
      */
     const dataKey = userData?.keyData;
+
     /**
-     * Store the calorie count for the user's consumption.
+     * @description Store the calorie count for the user's consumption.
      * @constant {number} calorieCountNum - User's calorie count.
      */
     const calorieCountNum = dataKey?.calorieCount;
+
     /**
-     * Store the protein count for the user's consumption.
+     * @description Store the protein count for the user's consumption.
      * @constant {number} proteinCountNum - User's protein count.
      */
     const proteinCountNum = dataKey?.proteinCount;
+
     /**
-     * Store the carbohydrate count for the user's consumption.
+     * @description Store the carbohydrate count for the user's consumption.
      * @constant {number} carbohydrateCountNum - User's carbohydrate count.
      */
     const carbohydrateCountNum = dataKey?.carbohydrateCount;
+
     /**
-     * Store the lipid count for the user's consumption.
+     * @description Store the lipid count for the user's consumption.
      * @constant {number} carbohydrateCountNum - User's lipid count.
      */
     const lipidCountNum = dataKey?.lipidCount;
     
     /**
-     * Renders the user consumption data 
-     * If the state has stored the string "false", the user is redirected to the error page
+     * @description Renders the user consumption data 
+     * If the state idChecker has stored the string "false", the user is redirected to the error page
      * @param {object} userData - An object containing user's data
      * @returns {JSX.Element} A React component representing the score chart or the error page
      */
-    if(userData !== "false"){
+    if(getIdChecker !== 0){
     return (
         <div className='user-consume'>
             {dataKey ? Object.keys(dataKey).map((data) => (
@@ -140,12 +118,17 @@ function UserConsume (props) {
     )}else{
         return(
         <div>
-            <Navigate replace to="/Error404" />
+            <Navigate replace to="/user/404/Error" />
         </div>
         )
     }
 
 
 }
+
+UserConsume.propTypes = {
+    dataSource: PropTypes.object,
+    idChecker: PropTypes.number,
+};
 
 export default UserConsume

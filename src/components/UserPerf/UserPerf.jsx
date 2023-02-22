@@ -1,79 +1,42 @@
 import './UserPerf.css';
-import { useParams, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from "recharts";
-import { getAPIUserPerformance } from '../../services/ApiCalls';
+import PropTypes from 'prop-types';
 
 
 function UserPerf (props) {
 
     /**
-     * Destructuring the useParams hook to retrieve the user id
-     */
-    const params = useParams();
-    const userId = params.id;
-
-    /**
-     * Parsing the user id from string to integer
-     * @type {number}
-     */
-    let userIdNumber = parseInt(userId)
-
-    /**
-     * Retrieving the data source from the props
+     * @description Retrieving the data source from the props
+     * dataSource provides data used for the chart, idChecker provides id check
      * @type {Array}
      */
     const getData = props.dataSource;
-    // The params and user id variables are used to retrieve the user's id stocked in the HTML, which is then parsed as an integer in the userIdNumber variable
-    // The getData function is used to retrieve the data props, which are received from a parent element in the App file
+    const getIdChecker = props.idChecker;
 
     /**
-     * The userData state that stores the user's session data
+     * @description The userData state that stores the user's session data
      * @type {Array}
      */
-    const [userData, setUserData] = useState(["before set"]);
-    const [idChecker, setIdChecker] = useState([]);
+    const [userData, setUserData] = useState();
 
     /**
-     * The useEffect hook that sets the userData state to the data from the data source
-     * userData is a state that receives its data via setUserData, provided that the received data is not "undefined"
-     * In the case of non-undefined data, the data from the props is sent to the state, otherwise, the string "false" is sent
+     * @description The useEffect hook that sets the userData state to the data from the data source
+     * userData is a state that receives its data via setUserData
      */
     useEffect(()=>{
-      const dataToUse = () => {
-        if(getData !== undefined) {
-            getAPIUserPerformance(userIdNumber)
-          .then((data) => setUserData(data))
-        }
-      };
-      const idCheckerFunction = () => {
-        if(getData !== undefined) {
-            getAPIUserPerformance(userIdNumber)
-          .then((data) => setIdChecker(data.id))
-          .catch(error => setIdChecker("false"))
-        }
-      };
-      dataToUse();
-      idCheckerFunction();
-    },[userIdNumber, getData])
-
-    
-    /*useEffect(()=>{
-    const dataToUse = () => {
-    if(getData !== undefined) {
-        const element = getData.find((data) => data.userId === userIdNumber);
-        setUserData(element); 
-        if(element === undefined) {
-        setUserData("false")
-        }
-    }
-    };
-    dataToUse();
-    },[userIdNumber, getData])*/
+        const dataToUse = () => {
+          if(getData !== undefined) {
+              setUserData(getData)
+          }
+        };
+        dataToUse();
+      },[getData])
 
 
     /**
-     * Transforms the `kind` number into its corresponding string name
+     * @description Transforms the `kind` number into its corresponding string name
      * @param {number} kind - The number representing the kind of performance data
      * @return {string} The string name of the kind of performance data
      */
@@ -89,12 +52,14 @@ function UserPerf (props) {
         }
     }
 
-    // radarKind transforms the numbers found at kind to their name
-
+    /**
+     * @description Takes user's performance data
+     * @type {Array}
+     */
     const perfData = userData?.data
 
     /**
-     * Sorts the performance data array based on the `kind` property
+     * @description Sorts the performance data array based on the `kind` property
      * @param {Object} a - The first object in the array
      * @param {Object} b - The second object in the array
      * @return {number} The sort order of the two objects based on the `kind` property
@@ -115,21 +80,51 @@ function UserPerf (props) {
         return 0;
     };
 
-    // sortData permits to chose the order of the kind names
-
-    const perfDataSorted = perfData?.sort(sortData)
-
-    // perfDataSorted takes both the data stored in the state and put in perfData const and the order we want from sortData
 
     /**
-     * Renders the performance data in a radar chart
-     * If the state has stored the string "false", the user is redirected to the error page
+     * @description Set user's performance data to 0 before userData state is filled with data, avoiding console error "NaN"
+     * @type {Array}
+     */
+    const beforeSet = [
+        {
+            value: 0,
+            kind: 0
+        },
+        {
+            value: 0,
+            kind: 0
+        },
+        {
+            value: 0,
+            kind: 0
+        },
+        {
+            value: 0,
+            kind: 0
+        },
+        {
+            value: 0,
+            kind: 0
+        },
+        {
+            value: 0,
+            kind: 0
+        }
+    ]
+
+    /**
+     * @description perfDataSorted permits to give an order to the user's performance data
+     * @type {Array}
+     */
+    const perfDataSorted = perfData ? perfData?.sort(sortData) : beforeSet 
+
+    /**
+     * @description Renders the performance data in a radar chart
+     * If the state idChecker has stored the string "false", the user is redirected to the error page
      * @param {object} userData - An object containing user's data
      * @returns {JSX.Element} A React component representing the score chart or the error page
      */
-    if(idChecker !== "false"){
-    //const perfDataFiltered = perfDataSorted?.filter(data => typeof data.value === 'number' && !isNaN(data.value));
-    if(userData[0] === "before set") { return null} else {
+    if(getIdChecker !== 0){
     return (
         <div className='user-perf'>
             <ResponsiveContainer>
@@ -145,31 +140,25 @@ function UserPerf (props) {
                 </RadarChart> 
             </ResponsiveContainer>
         </div>
-    )}}else{
+    )}else{
         return(
         <div>
-            <Navigate replace to="/Error404" />
+            <Navigate replace to="/user/404/Error" />
         </div>
         )
     }
 
-    // If the state has stored the string "false", the user is redirected to the error page
-
 }
+
+UserPerf.propTypes = {
+    dataSource: PropTypes.shape({
+      data: PropTypes.arrayOf(PropTypes.shape({
+        value: PropTypes.number,
+        kind: PropTypes.number
+      }))
+    }),
+    idChecker: PropTypes.number,
+};
 
 export default UserPerf
 
-
-/*
-useEffect(()=>{
-    const dataToUse = () => {
-    if(getData !== undefined) {
-        const element = getData.find((data) => data.userId === userIdNumber);
-        setUserData(element); 
-        if(element === undefined) {
-        setUserData("false")
-        }
-    }
-    };
-    dataToUse();
-},[userIdNumber, getData])*/
