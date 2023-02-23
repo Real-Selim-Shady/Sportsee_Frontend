@@ -1,7 +1,7 @@
 import './UserPerf.css';
 import { Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from "recharts";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
 
 
@@ -42,12 +42,12 @@ function UserPerf (props) {
      */
     const radarKind = (kind) => {
         switch (kind){
-            case 1: return "Cardio";
-            case 2: return "Energie";
-            case 3: return "Endurance";
-            case 4: return "Force";
-            case 5: return "Vitesse";
-            case 6: return "Intensité";
+            case 1: return 'Cardio';
+            case 2: return 'Energie';
+            case 3: return 'Endurance';
+            case 4: return 'Force';
+            case 5: return 'Vitesse';
+            case 6: return 'Intensité';
             default: return null;
         }
     }
@@ -82,7 +82,7 @@ function UserPerf (props) {
 
 
     /**
-     * @description Set user's performance data to 0 before userData state is filled with data, avoiding console error "NaN"
+     * @description Set user's performance data to 0 before userData state is filled with data, avoiding console error 'NaN'
      * @type {Array}
      */
     const beforeSet = [
@@ -120,7 +120,7 @@ function UserPerf (props) {
 
     /**
      * @description Renders the performance data in a radar chart
-     * If the state idChecker has stored the string "false", the user is redirected to the error page
+     * If the state idChecker has stored the string 'false', the user is redirected to the error page
      * @param {object} userData - An object containing user's data
      * @returns {JSX.Element} A React component representing the score chart or the error page
      */
@@ -128,22 +128,22 @@ function UserPerf (props) {
     return (
         <div className='user-perf'>
             <ResponsiveContainer>
-                <RadarChart data={perfDataSorted} outerRadius={60} className="radar-chart" >
+                <RadarChart data={perfDataSorted} outerRadius={60} className='radar-chart' >
                     <PolarGrid radialLines={false} />
                     <PolarAngleAxis 
                         dataKey='kind' 
                         tickLine={false} 
                         tick={{ fontSize: 11, fontWeight: 400 }} 
-                        stroke="#FFFFFF" 
+                        stroke='#FFFFFF' 
                         tickFormatter={radarKind} />
-                    <Radar dataKey='value' fill="#FF0101B2"/>
+                    <Radar dataKey='value' fill='#FF0101B2'/>
                 </RadarChart> 
             </ResponsiveContainer>
         </div>
     )}else{
         return(
         <div>
-            <Navigate replace to="/user/404/Error" />
+            <Navigate replace to='/user/404/Error' />
         </div>
         )
     }

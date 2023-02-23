@@ -58,7 +58,7 @@ function UserWeightCal (props) {
     function tooltipWeightCal ({payload, active}) {
         if (active) {
             return (
-                <div className='weightCal-chart-tooltip' style={{ borderBlockColor: "red", padding: "10px" }}>
+                <div className='weightCal-chart-tooltip' style={{ borderBlockColor: 'red', padding: '10px' }}>
                     <div>{`${payload[0].value}`}kg</div>
                     <div>{`${payload[1].value}`}Kcal</div>
                 </div>
@@ -70,23 +70,23 @@ function UserWeightCal (props) {
 
     /**
      * @description Renders the weight and calories data in a bar chart
-     * If the state idChecker has stored the string "false", the user is redirected to the error page
+     * If the state idChecker has stored the string 'false', the user is redirected to the error page
      * @param {object} userData - An object containing user's data
      * @returns {JSX.Element} A React component representing the score chart or the error page
      */
     if(getIdChecker !== 0){
     return (
         <div className='user-weight-cal'>
-            <ResponsiveContainer width="98%" aspect={2} >
+            <ResponsiveContainer width='98%' aspect={2} >
                 <BarChart
                 data={userData?.sessions}
                 margin={{ top: 40, right: 35, bottom: 30, left: 35 }}
                 barGap={5}
-                barCategoryGap="37%"
+                barCategoryGap='37%'
                 >
                 
                 <CartesianGrid 
-                strokeDasharray="3 3"
+                strokeDasharray='3 3'
                 vertical={false}
                 height={1} 
                  />
@@ -100,35 +100,35 @@ function UserWeightCal (props) {
                  />
 
                 <YAxis
-                dataKey="kilogram" 
-                tickSize="0"
-                tickMargin="20"
+                dataKey='kilogram' 
+                tickSize='0'
+                tickMargin='20'
                 axisLine={false} 
-                yAxisId="right" 
-                orientation="right" 
-                domain={["dataMin -1", "dataMax +2"]} 
-                type="number" 
-                tickCount="3" 
+                yAxisId='right' 
+                orientation='right' 
+                domain={['dataMin -1', 'dataMax +2']} 
+                type='number' 
+                tickCount='3' 
                  />
 
                 <YAxis 
-                dataKey="calories"
+                dataKey='calories'
                 yAxisId='left'
                 orientation='left' 
                 hide={true}
-                type="number"
+                type='number'
                  />
 
                 <Tooltip 
                 content={tooltipWeightCal}
-                wrapperStyle={{ backgroundColor: "blue" }}
+                wrapperStyle={{ backgroundColor: 'blue' }}
                  />
 
                 <Legend
                 verticalAlign='top' 
-                align="right" 
+                align='right' 
                 height={80} 
-                iconType="circle"
+                iconType='circle'
                 iconSize={8} 
                 formatter={(value, entry, index) => (
                             <span className='weight-cal-legend'>{value}</span>)
@@ -136,19 +136,19 @@ function UserWeightCal (props) {
                  />
 
                 <Bar 
-                dataKey="kilogram" 
-                name="Poids (kg)" 
-                fill="black" 
+                dataKey='kilogram' 
+                name='Poids (kg)' 
+                fill='black' 
                 yAxisId='right'
                 radius={[50, 50, 0, 0]}
                  />
 
                 <Bar 
-                dataKey={"calories"} 
-                name="Calories brûlées (cKal)" 
-                fill="red" 
+                dataKey={'calories'} 
+                name='Calories brûlées (cKal)' 
+                fill='red' 
                 radius={[50, 50, 0, 0]} 
-                yAxisId="left"
+                yAxisId='left'
                  />
                 
                 </BarChart>
@@ -157,7 +157,7 @@ function UserWeightCal (props) {
     )}else{
         return(
         <div>
-            <Navigate replace to="/user/404/Error" />
+            <Navigate replace to='/user/404/Error' />
         </div>
         )
     }

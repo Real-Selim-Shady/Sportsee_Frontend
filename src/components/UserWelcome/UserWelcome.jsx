@@ -36,7 +36,7 @@ function UserWelcome (props) {
 
   /**
    * @description Renders the welcome message with user's name
-   * If the state idChecker has stored the string "false", the user is redirected to the error page
+   * If the state idChecker has stored the string 'false', the user is redirected to the error page
    * @param {object} userData - An object containing user's data
    * @returns {JSX.Element} A React component representing the score chart or the error page
    */
@@ -49,7 +49,7 @@ function UserWelcome (props) {
   )}else{
     return(
       <div>
-        <Navigate replace to="/user/404/Error" />
+        <Navigate replace to='/user/404/Error' />
       </div>
     )
   }

@@ -65,7 +65,7 @@ function UserConsume (props) {
     
     /**
      * @description Renders the user consumption data 
-     * If the state idChecker has stored the string "false", the user is redirected to the error page
+     * If the state idChecker has stored the string 'false', the user is redirected to the error page
      * @param {object} userData - An object containing user's data
      * @returns {JSX.Element} A React component representing the score chart or the error page
      */
@@ -73,38 +73,38 @@ function UserConsume (props) {
     return (
         <div className='user-consume'>
             {dataKey ? Object.keys(dataKey).map((data) => (
-                <section key={data} className="user-consume-component">
+                <section key={data} className='user-consume-component'>
                     <img src={
-                        data === "calorieCount" ? "https://i.postimg.cc/sgmRW7Vr/calories-icon.png" :
-                        data === "proteinCount" ? "https://i.postimg.cc/Ls2r6Xfb/protein-icon.png" :
-                        data === "carbohydrateCount" ? "https://i.postimg.cc/ydkBsxCz/carbs-icon.png" :
-                        "https://i.postimg.cc/brD5F2cs/fat-icon.png"
+                        data === 'calorieCount' ? 'https://i.postimg.cc/sgmRW7Vr/calories-icon.png' :
+                        data === 'proteinCount' ? 'https://i.postimg.cc/Ls2r6Xfb/protein-icon.png' :
+                        data === 'carbohydrateCount' ? 'https://i.postimg.cc/ydkBsxCz/carbs-icon.png' :
+                        'https://i.postimg.cc/brD5F2cs/fat-icon.png'
                         /**
                          * @description Determines which image to display based on the value of the data variable. 
                          * The image displayed is related to the type of data being displayed
                          */
-                    } alt={"icone consomation"+data} className="user-consume-img"/>
-                    <div className="user-consume-txt">
-                        <p className='user-consume-num'>{new Intl.NumberFormat("en-IN", {
+                    } alt={'icone consomation'+data} className='user-consume-img'/>
+                    <div className='user-consume-txt'>
+                        <p className='user-consume-num'>{new Intl.NumberFormat('en-IN', {
                                 maximumSignificantDigits: 3,
                             }).format(
-                                data === "calorieCount" ? calorieCountNum :
-                                data === "proteinCount" ? proteinCountNum :
-                                data === "carbohydrateCount" ? carbohydrateCountNum :
+                                data === 'calorieCount' ? calorieCountNum :
+                                data === 'proteinCount' ? proteinCountNum :
+                                data === 'carbohydrateCount' ? carbohydrateCountNum :
                                 lipidCountNum
                                 /**
                                  * @description Determines which number to display based on the value of the data variable. 
                                  * The number displayed is related to the type of data being displayed
                                  */
                             )}{
-                                data === "calorieCount" ? "kCal" : "g" 
+                                data === 'calorieCount' ? 'kCal' : 'g' 
                             }
                         </p>
                         <p className='user-consume-name'>{
-                                data === "calorieCount" ? "Calories" :
-                                data === "proteinCount" ? "Protéines" :
-                                data === "carbohydrateCount" ? "Glucides" :
-                                "Lipides"
+                                data === 'calorieCount' ? 'Calories' :
+                                data === 'proteinCount' ? 'Protéines' :
+                                data === 'carbohydrateCount' ? 'Glucides' :
+                                'Lipides'
                                 /**
                                  * @description Determines which name to display based on the value of the data variable. 
                                  * The name displayed is related to the type of data being displayed
@@ -118,7 +118,7 @@ function UserConsume (props) {
     )}else{
         return(
         <div>
-            <Navigate replace to="/user/404/Error" />
+            <Navigate replace to='/user/404/Error' />
         </div>
         )
     }

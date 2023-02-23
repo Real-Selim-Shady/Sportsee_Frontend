@@ -80,7 +80,7 @@ function UserAverageSession (props) {
 
     /**
      * This component is used to display the average session duration for the user.
-     * If the state idChecker has stored the string "false", the user is redirected to the error page
+     * If the state idChecker has stored the string 'false', the user is redirected to the error page
      * The chart will show the session duration on the Y-axis and the days on the X-axis.
      * The tooltip will display the session duration.
      * @component
@@ -93,19 +93,19 @@ function UserAverageSession (props) {
     return (
         <div className='user-average-session'>
             <p className='user-as-title'>Durée moyenne des <br/> sessions</p>
-            <ResponsiveContainer width="100%" aspect={2} className="line-chart-bloc">
+            <ResponsiveContainer width='100%' aspect={2} className='line-chart-bloc'>
                 <LineChart width={100} height={100} data={sessions}>
                     <Tooltip
                     content={tooltipAverageSession}
                      />
                     <XAxis
                     className='x-axis' 
-                    dataKey="day"
+                    dataKey='day'
                     padding={{ left: -17, right: -17 }}
-                    stroke="transparent"
+                    stroke='transparent'
                     axisLine={false} 
                     tick={{ fill: 'rgba(255, 255, 255, 0.5)' }}
-                    tickSize="15"
+                    tickSize='15'
                     tickFormatter={(day) => dayAbbreviations[day]}
                      />
                      <YAxis 
@@ -113,8 +113,8 @@ function UserAverageSession (props) {
                       />
                     <Line 
                     className='chart-line'
-                    type="monotone" 
-                    dataKey="sessionLength" 
+                    type='monotone' 
+                    dataKey='sessionLength' 
                     strokeWidth={2}
                     dot={false}
                     activeDot={{  
@@ -125,9 +125,9 @@ function UserAverageSession (props) {
                     stroke={`url(#line-gradient)`}
                      />
                     <defs>
-                        <linearGradient id="line-gradient" x1="0" y1="0" x2="3" y2="0">
-                            <stop offset="10%" stopColor="rgba(255, 255, 255, 0.50)" />
-                            <stop offset="30%" stopColor="rgba(255, 255, 255, 1.00)" />
+                        <linearGradient id='line-gradient' x1='0' y1='0' x2='3' y2='0'>
+                            <stop offset='10%' stopColor='rgba(255, 255, 255, 0.50)' />
+                            <stop offset='30%' stopColor='rgba(255, 255, 255, 1.00)' />
                         </linearGradient>
                     </defs>
                 </LineChart>
@@ -136,7 +136,7 @@ function UserAverageSession (props) {
     )}else{
         return(
         <div>
-            <Navigate replace to="/user/404/Error" />
+            <Navigate replace to='/user/404/Error' />
         </div>
         )
     }
