@@ -5,6 +5,9 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } fro
 import PropTypes from "prop-types";
 
 
+/**
+ * @description Function rendering user performance on a radar chart
+ */
 function UserPerf (props) {
 
     /**

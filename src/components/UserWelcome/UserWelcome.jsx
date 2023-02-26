@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./UserWelcome.css";
 
-
+/**
+ * @description Function rendering welcome message with user name
+ */
 function UserWelcome (props) {
 
   /**

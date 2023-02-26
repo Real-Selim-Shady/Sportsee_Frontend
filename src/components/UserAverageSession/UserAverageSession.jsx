@@ -5,6 +5,9 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
 import PropTypes from "prop-types";
 
 
+/**
+ * @description Function rendering user average sessions on a line chart
+ */
 function UserAverageSession (props) {
 
     /**

@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 
+
+/**
+ * @description Function rendering user weight and burned calories on a bar chart
+ */
 function UserWeightCal (props) {
 
     /**

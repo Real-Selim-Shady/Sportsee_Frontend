@@ -3,6 +3,10 @@ import { Navigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+
+/**
+ * @description Function rendering user energy consumption 
+ */
 function UserConsume (props) {
 
     /**

@@ -5,6 +5,9 @@ import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 
 
+/**
+ * @description Function rendering user score on a radial bar chart
+ */
 function UserScore (props) {
 
 

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import UserAverageSession from "../../components/UserAverageSession/UserAverageSession";
@@ -45,23 +45,19 @@ function App() {
     if (currentId) {
       getAPIUserPerformance(currentId)
         .then((data) => setFetchPerf(data))
-        .catch(error => setIdChecker(0));
-
-      getAPIUserPerformance(currentId)
-        .then((data) => setIdChecker(data.userId))
-        .catch(error => setIdChecker(0));
+        .catch(() => setIdChecker(0));
 
       getAPIUserMainData(currentId)
         .then((data) => setFetchMain(data))
-        .catch(error => setIdChecker(0));
+        .catch(() => setIdChecker(0));
 
       getAPIUserActivity(currentId)
         .then((data) => setFetchActivity(data))
-        .catch(error => setIdChecker(0));
+        .catch(() => setIdChecker(0));
 
       getAPIUserAverageSession(currentId)
         .then((data) => setAverageSession(data))
-        .catch(error => setIdChecker(0));
+        .catch(() => setIdChecker(0));
     }
   }, [currentId]);
 
