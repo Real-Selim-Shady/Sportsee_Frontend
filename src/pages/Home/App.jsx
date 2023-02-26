@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import UserAverageSession from '../../components/UserAverageSession/UserAverageSession';
-import UserConsume from '../../components/UserConsume/UserConsume';
-import UserPerf from '../../components/UserPerf/UserPerf';
-import UserScore from '../../components/UserScore/UserScore';
-import UserWeightCal from '../../components/UserWeightCal/UserWeightCal';
-import UserWelcome from '../../components/UserWelcome/UserWelcome';
-import Error from '../Error/Error';
-import { Routes, Route } from 'react-router-dom';
-import { getAPIUserPerformance, getAPIUserActivity, getAPIUserAverageSession, getAPIUserMainData } from '../../services/ApiCalls';
-import PropTypes from 'prop-types';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import UserAverageSession from "../../components/UserAverageSession/UserAverageSession";
+import UserConsume from "../../components/UserConsume/UserConsume";
+import UserPerf from "../../components/UserPerf/UserPerf";
+import UserScore from "../../components/UserScore/UserScore";
+import UserWeightCal from "../../components/UserWeightCal/UserWeightCal";
+import UserWelcome from "../../components/UserWelcome/UserWelcome";
+import Error from "../Error/Error";
+import { Routes, Route } from "react-router-dom";
+import { getAPIUserPerformance, getAPIUserActivity, getAPIUserAverageSession, getAPIUserMainData } from "../../services/ApiCalls";
+import PropTypes from "prop-types";
 
 /**
  * @function App
@@ -27,10 +28,10 @@ function App() {
   const match = url.match(/user\/(\d+)/);
   const currentId = match ? match[1] : null;
 
-  const [fetchPerf, setFetchPerf] = useState()
-  const [fetchMain, setFetchMain] = useState()
-  const [fetchActivity, setFetchActivity] = useState()
-  const [fetchAverageSession, setAverageSession] = useState()
+  const [fetchPerf, setFetchPerf] = useState();
+  const [fetchMain, setFetchMain] = useState();
+  const [fetchActivity, setFetchActivity] = useState();
+  const [fetchAverageSession, setAverageSession] = useState();
   const [idChecker, setIdChecker] = useState(-1);
 
   /**
@@ -62,7 +63,7 @@ function App() {
         .then((data) => setAverageSession(data))
         .catch(error => setIdChecker(0));
     }
-  }, [currentId])
+  }, [currentId]);
 
   return (
     <Routes>

@@ -1,8 +1,8 @@
-import './UserWeightCal.css';
-import { Navigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import PropTypes from 'prop-types';
+import "./UserWeightCal.css";
+import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 
 function UserWeightCal (props) {
 
@@ -27,11 +27,11 @@ function UserWeightCal (props) {
     useEffect(()=>{
         const dataToUse = () => {
           if(getData !== undefined) {
-              setUserData(getData)
+              setUserData(getData);
           }
         };
         dataToUse();
-      },[getData])
+      },[getData]);
 
     /**
      * @description The function dayFormat takes in a value as an argument and returns the day of the month in that value. 
@@ -41,11 +41,11 @@ function UserWeightCal (props) {
      * @returns {number} The day of the month in the date value
      */
     const dayFormat = (value) => {
-        const valueString = value.toString()
-        const valueDay = valueString.split('-')
+        const valueString = value.toString();
+        const valueDay = valueString.split("-");
         
-        return (Number(valueDay[2]))
-    }
+        return (Number(valueDay[2]));
+    };
     
 
     /**
@@ -58,14 +58,14 @@ function UserWeightCal (props) {
     function tooltipWeightCal ({payload, active}) {
         if (active) {
             return (
-                <div className='weightCal-chart-tooltip' style={{ borderBlockColor: 'red', padding: '10px' }}>
+                <div className='weightCal-chart-tooltip' style={{ borderBlockColor: "red", padding: "10px" }}>
                     <div>{`${payload[0].value}`}kg</div>
                     <div>{`${payload[1].value}`}Kcal</div>
                 </div>
                 
-            )
+            );
         }
-        return null
+        return null;
     }
 
     /**
@@ -106,7 +106,7 @@ function UserWeightCal (props) {
                 axisLine={false} 
                 yAxisId='right' 
                 orientation='right' 
-                domain={['dataMin -1', 'dataMax +2']} 
+                domain={["dataMin -1", "dataMax +2"]} 
                 type='number' 
                 tickCount='3' 
                  />
@@ -121,7 +121,7 @@ function UserWeightCal (props) {
 
                 <Tooltip 
                 content={tooltipWeightCal}
-                wrapperStyle={{ backgroundColor: 'blue' }}
+                wrapperStyle={{ backgroundColor: "blue" }}
                  />
 
                 <Legend
@@ -130,7 +130,7 @@ function UserWeightCal (props) {
                 height={80} 
                 iconType='circle'
                 iconSize={8} 
-                formatter={(value, entry, index) => (
+                formatter={(value) => (
                             <span className='weight-cal-legend'>{value}</span>)
                         }
                  />
@@ -144,7 +144,7 @@ function UserWeightCal (props) {
                  />
 
                 <Bar 
-                dataKey={'calories'} 
+                dataKey={"calories"} 
                 name='Calories brûlées (cKal)' 
                 fill='red' 
                 radius={[50, 50, 0, 0]} 
@@ -154,12 +154,12 @@ function UserWeightCal (props) {
                 </BarChart>
             </ResponsiveContainer>
         </div>
-    )}else{
+    );}else{
         return(
         <div>
             <Navigate replace to='/user/404/Error' />
         </div>
-        )
+        );
     }
 
 }
@@ -177,5 +177,5 @@ UserWeightCal.propTypes = {
     idChecker: PropTypes.number,
 };
 
-export default UserWeightCal
+export default UserWeightCal;
 

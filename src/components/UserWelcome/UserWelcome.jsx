@@ -1,7 +1,7 @@
-import { Navigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import './UserWelcome.css';
+import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./UserWelcome.css";
 
 
 function UserWelcome (props) {
@@ -28,11 +28,11 @@ function UserWelcome (props) {
   useEffect(()=>{
     const dataToUse = () => {
       if(getData !== undefined) {
-          setUserData(getData)
+          setUserData(getData);
       }
     };
     dataToUse();
-  },[getData])
+  },[getData]);
 
   /**
    * @description Renders the welcome message with user's name
@@ -46,12 +46,12 @@ function UserWelcome (props) {
         <h1 className='welcome-title'>Bonjour<p className='user-name'>{userData?.userInfos?.firstName}</p></h1>
         <p className='welcome-congrats'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       </div>
-  )}else{
+  );}else{
     return(
       <div>
         <Navigate replace to='/user/404/Error' />
       </div>
-    )
+    );
   }
   
 }
@@ -61,5 +61,5 @@ UserWelcome.propTypes = {
   idChecker: PropTypes.number,
 };
 
-export default UserWelcome
+export default UserWelcome;
 

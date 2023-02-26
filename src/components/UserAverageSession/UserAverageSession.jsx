@@ -1,8 +1,8 @@
-import './UserAverageSession.css';
-import { Navigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import PropTypes from 'prop-types';
+import "./UserAverageSession.css";
+import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 
 
 function UserAverageSession (props) {
@@ -29,11 +29,11 @@ function UserAverageSession (props) {
     useEffect(()=>{
         const dataToUse = () => {
           if(getData !== undefined) {
-              setUserData(getData)
+              setUserData(getData);
           }
         };
         dataToUse();
-      },[getData])
+      },[getData]);
 
     /**
      * A function that  displays a tooltip when a data point is active in the chart
@@ -48,17 +48,17 @@ function UserAverageSession (props) {
                 <div className='average-session-tooltip'>
                     <div>{`${payload[0].value}`} min</div>
                 </div>
-            )
+            );
         }
-        return null
-    };
+        return null;
+    }
 
 
     /**
      * An array that holds the week day abbreviations along with two additional data points, one at the beginning and one at the end.
      * @type {Array}
      */
-    const dayAbbreviations = ['','L', 'M', 'M', 'J', 'V', 'S', 'D', ''];
+    const dayAbbreviations = ["","L", "M", "M", "J", "V", "S", "D", ""];
 
     /**
      * An array that holds the structured user sessions data
@@ -75,7 +75,7 @@ function UserAverageSession (props) {
         sessions[0].day = 0;
         sessions.push(structuredClone(sessions[sessions.length-1]));
         sessions[sessions.length-1].day = 8;
-    };
+    }
     
 
     /**
@@ -104,7 +104,7 @@ function UserAverageSession (props) {
                     padding={{ left: -17, right: -17 }}
                     stroke='transparent'
                     axisLine={false} 
-                    tick={{ fill: 'rgba(255, 255, 255, 0.5)' }}
+                    tick={{ fill: "rgba(255, 255, 255, 0.5)" }}
                     tickSize='15'
                     tickFormatter={(day) => dayAbbreviations[day]}
                      />
@@ -118,11 +118,11 @@ function UserAverageSession (props) {
                     strokeWidth={2}
                     dot={false}
                     activeDot={{  
-                        stroke: 'rgba(255, 255, 255, 0.5)',
+                        stroke: "rgba(255, 255, 255, 0.5)",
                         strokeWidth: 7,
                         r: 3
                     }}
-                    stroke={`url(#line-gradient)`}
+                    stroke={"url(#line-gradient)"}
                      />
                     <defs>
                         <linearGradient id='line-gradient' x1='0' y1='0' x2='3' y2='0'>
@@ -133,12 +133,12 @@ function UserAverageSession (props) {
                 </LineChart>
             </ResponsiveContainer>
         </div>
-    )}else{
+    );}else{
         return(
         <div>
             <Navigate replace to='/user/404/Error' />
         </div>
-        )
+        );
     }
 
 }
@@ -156,4 +156,4 @@ UserAverageSession.propTypes = {
     idChecker: PropTypes.number,
   };
 
-export default UserAverageSession
+export default UserAverageSession;

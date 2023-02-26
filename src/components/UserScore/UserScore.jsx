@@ -1,8 +1,8 @@
-import './UserScore.css';
-import { Navigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
-import PropTypes from 'prop-types';
+import "./UserScore.css";
+import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 
 
 function UserScore (props) {
@@ -29,11 +29,11 @@ function UserScore (props) {
     useEffect(()=>{
         const dataToUse = () => {
           if(getData !== undefined) {
-              setUserData(getData)
+              setUserData(getData);
           }
         };
         dataToUse();
-      },[getData])
+      },[getData]);
 
     /**
      * @description An array that contains two objects representing the user's score information
@@ -47,12 +47,12 @@ function UserScore (props) {
      */
     const score = [
         {
-        'todayScore': Math.round(userData?.todayScore * 100) || Math.round(userData?.score * 100),
-        'fill': 'red'
+        "todayScore": Math.round(userData?.todayScore * 100) || Math.round(userData?.score * 100),
+        "fill": "red"
         },
         {
-        'todayScore': 100,
-        'fill': 'transparent'
+        "todayScore": 100,
+        "fill": "transparent"
         }
     ];
 
@@ -88,12 +88,12 @@ function UserScore (props) {
             </div>
 
         </div>
-    )}else{
+    );}else{
         return(
         <div>
             <Navigate replace to='/user/404/Error' />
         </div>
-        )
+        );
     }
 
 }
@@ -103,5 +103,5 @@ UserScore.propTypes = {
     idChecker: PropTypes.number,
 };
 
-export default UserScore
+export default UserScore;
 

@@ -1,7 +1,7 @@
-import './UserConsume.css';
-import { Navigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import "./UserConsume.css";
+import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 function UserConsume (props) {
 
@@ -26,11 +26,11 @@ function UserConsume (props) {
     useEffect(()=>{
         const dataToUse = () => {
           if(getData !== undefined) {
-              setUserData(getData)
+              setUserData(getData);
           }
         };
         dataToUse();
-      },[getData])
+      },[getData]);
 
 
     /**
@@ -75,36 +75,36 @@ function UserConsume (props) {
             {dataKey ? Object.keys(dataKey).map((data) => (
                 <section key={data} className='user-consume-component'>
                     <img src={
-                        data === 'calorieCount' ? 'https://i.postimg.cc/sgmRW7Vr/calories-icon.png' :
-                        data === 'proteinCount' ? 'https://i.postimg.cc/Ls2r6Xfb/protein-icon.png' :
-                        data === 'carbohydrateCount' ? 'https://i.postimg.cc/ydkBsxCz/carbs-icon.png' :
-                        'https://i.postimg.cc/brD5F2cs/fat-icon.png'
+                        data === "calorieCount" ? "https://i.postimg.cc/sgmRW7Vr/calories-icon.png" :
+                        data === "proteinCount" ? "https://i.postimg.cc/Ls2r6Xfb/protein-icon.png" :
+                        data === "carbohydrateCount" ? "https://i.postimg.cc/ydkBsxCz/carbs-icon.png" :
+                        "https://i.postimg.cc/brD5F2cs/fat-icon.png"
                         /**
                          * @description Determines which image to display based on the value of the data variable. 
                          * The image displayed is related to the type of data being displayed
                          */
-                    } alt={'icone consomation'+data} className='user-consume-img'/>
+                    } alt={"icone consomation"+data} className='user-consume-img'/>
                     <div className='user-consume-txt'>
-                        <p className='user-consume-num'>{new Intl.NumberFormat('en-IN', {
+                        <p className='user-consume-num'>{new Intl.NumberFormat("en-IN", {
                                 maximumSignificantDigits: 3,
                             }).format(
-                                data === 'calorieCount' ? calorieCountNum :
-                                data === 'proteinCount' ? proteinCountNum :
-                                data === 'carbohydrateCount' ? carbohydrateCountNum :
+                                data === "calorieCount" ? calorieCountNum :
+                                data === "proteinCount" ? proteinCountNum :
+                                data === "carbohydrateCount" ? carbohydrateCountNum :
                                 lipidCountNum
                                 /**
                                  * @description Determines which number to display based on the value of the data variable. 
                                  * The number displayed is related to the type of data being displayed
                                  */
                             )}{
-                                data === 'calorieCount' ? 'kCal' : 'g' 
+                                data === "calorieCount" ? "kCal" : "g" 
                             }
                         </p>
                         <p className='user-consume-name'>{
-                                data === 'calorieCount' ? 'Calories' :
-                                data === 'proteinCount' ? 'Protéines' :
-                                data === 'carbohydrateCount' ? 'Glucides' :
-                                'Lipides'
+                                data === "calorieCount" ? "Calories" :
+                                data === "proteinCount" ? "Protéines" :
+                                data === "carbohydrateCount" ? "Glucides" :
+                                "Lipides"
                                 /**
                                  * @description Determines which name to display based on the value of the data variable. 
                                  * The name displayed is related to the type of data being displayed
@@ -115,12 +115,12 @@ function UserConsume (props) {
                 </section>
             )) : null}
         </div>
-    )}else{
+    );}else{
         return(
         <div>
             <Navigate replace to='/user/404/Error' />
         </div>
-        )
+        );
     }
 
 
@@ -131,4 +131,4 @@ UserConsume.propTypes = {
     idChecker: PropTypes.number,
 };
 
-export default UserConsume
+export default UserConsume;

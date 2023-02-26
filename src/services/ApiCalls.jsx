@@ -1,5 +1,5 @@
 
-const port = 'http://localhost:3000/'
+const port = "http://localhost:3000/";
 
 /**
  * @description this is the fetch for the API showing user's data
@@ -9,23 +9,23 @@ const port = 'http://localhost:3000/'
 function getAPIUserData(uri){
     return fetch(port + uri)
         .then(response => response.json())
-        .then(response => response.data)
+        .then(response => response.data);
 }
 
 function getAPIUserMainData(userId){
-    return getAPIUserData('user/' + userId)
+    return getAPIUserData("user/" + userId);
 }
 
 function getAPIUserActivity(userId){
-    return getAPIUserData('user/' + userId + '/activity')
+    return getAPIUserData("user/" + userId + "/activity");
 }
 
 function getAPIUserAverageSession(userId){
-    return getAPIUserData('user/' + userId + '/average-sessions')
+    return getAPIUserData("user/" + userId + "/average-sessions");
 }
 
 function getAPIUserPerformance(userId){
-    return getAPIUserData('user/' + userId + '/performance')
+    return getAPIUserData("user/" + userId + "/performance");
 }
 
-export {getAPIUserMainData, getAPIUserActivity, getAPIUserAverageSession, getAPIUserPerformance}
+export {getAPIUserMainData, getAPIUserActivity, getAPIUserAverageSession, getAPIUserPerformance};

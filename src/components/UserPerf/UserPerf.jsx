@@ -1,8 +1,8 @@
-import './UserPerf.css';
-import { Navigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from 'recharts';
-import PropTypes from 'prop-types';
+import "./UserPerf.css";
+import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 
 
 function UserPerf (props) {
@@ -28,11 +28,11 @@ function UserPerf (props) {
     useEffect(()=>{
         const dataToUse = () => {
           if(getData !== undefined) {
-              setUserData(getData)
+              setUserData(getData);
           }
         };
         dataToUse();
-      },[getData])
+      },[getData]);
 
 
     /**
@@ -42,21 +42,21 @@ function UserPerf (props) {
      */
     const radarKind = (kind) => {
         switch (kind){
-            case 1: return 'Cardio';
-            case 2: return 'Energie';
-            case 3: return 'Endurance';
-            case 4: return 'Force';
-            case 5: return 'Vitesse';
-            case 6: return 'Intensité';
+            case 1: return "Cardio";
+            case 2: return "Energie";
+            case 3: return "Endurance";
+            case 4: return "Force";
+            case 5: return "Vitesse";
+            case 6: return "Intensité";
             default: return null;
         }
-    }
+    };
 
     /**
      * @description Takes user's performance data
      * @type {Array}
      */
-    const perfData = userData?.data
+    const perfData = userData?.data;
 
     /**
      * @description Sorts the performance data array based on the `kind` property
@@ -110,13 +110,13 @@ function UserPerf (props) {
             value: 0,
             kind: 0
         }
-    ]
+    ];
 
     /**
      * @description perfDataSorted permits to give an order to the user's performance data
      * @type {Array}
      */
-    const perfDataSorted = perfData ? perfData?.sort(sortData) : beforeSet 
+    const perfDataSorted = perfData ? perfData?.sort(sortData) : beforeSet; 
 
     /**
      * @description Renders the performance data in a radar chart
@@ -140,12 +140,12 @@ function UserPerf (props) {
                 </RadarChart> 
             </ResponsiveContainer>
         </div>
-    )}else{
+    );}else{
         return(
         <div>
             <Navigate replace to='/user/404/Error' />
         </div>
-        )
+        );
     }
 
 }
@@ -160,5 +160,5 @@ UserPerf.propTypes = {
     idChecker: PropTypes.number,
 };
 
-export default UserPerf
+export default UserPerf;
 
