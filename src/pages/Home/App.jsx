@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import React, { useState, useEffect } from "react";
 import "./App.css";
@@ -58,6 +59,13 @@ function App() {
       getAPIUserAverageSession(currentId)
         .then((data) => setAverageSession(data))
         .catch(() => setIdChecker(0));
+
+      /**
+      * @description this API call is used to check is the id is existing in data or not
+      */
+      getAPIUserPerformance(currentId)
+      .then((data) => setIdChecker(data.userId))
+      .catch(() => setIdChecker(0));
     }
   }, [currentId]);
 

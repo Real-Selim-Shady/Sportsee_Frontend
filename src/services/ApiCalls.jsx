@@ -3,11 +3,11 @@ const port = "http://localhost:3000/";
 
 /**
  * @description this is the fetch for the API showing user's data
- * @param {uri} uri - uri depending on the source of the data
+ * @param {query} query - query depending on the source of the data
  * @returns promise
  */
-function getAPIUserData(uri){
-    return fetch(port + uri)
+function getAPIUserData(query){
+    return fetch(port + query)
         .then(response => response.json())
         .then(response => response.data);
 }
