@@ -25,8 +25,8 @@ import PropTypes from "prop-types";
 function App() {
 
   /**
-  * @description id is found on URL and put in currentId const
-  */
+    * @description id is found on URL and put in currentId const
+    */
   const url = window.location.href;
   const match = url.match(/user\/(\d+)/);
   const currentId = match ? match[1] : null;
@@ -37,19 +37,25 @@ function App() {
   const [fetchAverageSession, setAverageSession] = useState();
   const [idChecker, setIdChecker] = useState(-1);
   const [loader, setLoader] = useState("on");
-  const [mockedData, setMockedData] = useState();
+  /**
+   * @description erase "//" on line 43 if you want to use mockedData
+   */
+  //const [mockedData, setMockedData] = useState();
 
   /**
-  * @description this useEffect use setter to change all file states
-  */
+    * @description this useEffect use setter to change all file states
+    */
   useEffect(() => {
 
     /**
-    * @description if the id is found, it is used to retrieve the right data via a fetch
-    */
+      * @description if the id is found, it is used to retrieve the right data via a fetch
+      */
     if (currentId) {
 
-      setMockedData(mokedData);
+      /**
+       * @description erase "//" on line 58 if you want to use mockedData
+       */
+      //setMockedData(mokedData); 
 
       getAPIUserPerformance(currentId)
         .then((data) => setFetchPerf(data))
@@ -68,16 +74,19 @@ function App() {
         .catch(() => setIdChecker(0));
 
       /**
-      * @description this API call is used to check is the id is existing in data or not
-      */
+        * @description this API call is used to check is the id is existing in data or not
+        */
       getAPIUserPerformance(currentId)
       .then((data) => setIdChecker(data.userId))
       .catch(() => setIdChecker(0));
     }
   }, [currentId]);
 
-  let dataChosen = {};
 
+  /**
+   * @description dataChosen is used in the case of sourcing mockedData instead of APIs' data
+   */
+  let dataChosen = {};
   if(idChecker == 12){
     dataChosen = 0;
   }else if(idChecker == 18) {
