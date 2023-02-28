@@ -36,7 +36,7 @@ function App() {
   const [fetchActivity, setFetchActivity] = useState();
   const [fetchAverageSession, setAverageSession] = useState();
   const [idChecker, setIdChecker] = useState(-1);
-  const [loader, setLoader] = useState("on");
+
   /**
    * @description erase "//" on line 43 if you want to use mockedData
    */
@@ -114,7 +114,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
-                <Loader dataSource = {loader} idChecker = {idChecker} />
+                <Loader idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
@@ -163,7 +163,7 @@ function App() {
                 </nav>
                 <p className='copyright'>Copyright, SportSee 2020</p>
               </aside>
-              <Loader dataSource = {loader} idChecker = {idChecker} />
+              <Loader idChecker = {idChecker} />
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
@@ -191,7 +191,7 @@ function App() {
                 </nav>
                 <p className='copyright'>Copyright, SportSee 2020</p>
               </aside>
-              <Loader dataSource = {loader} idChecker = {idChecker} />
+              <Loader idChecker = {idChecker} />
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
@@ -219,7 +219,7 @@ function App() {
                 </nav>
                 <p className='copyright'>Copyright, SportSee 2020</p>
               </aside>
-              <Loader dataSource = {loader} idChecker = {idChecker} />
+              <Loader idChecker = {idChecker} />
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
@@ -247,7 +247,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
-                <Loader dataSource = {loader} idChecker = {idChecker} />
+                <Loader idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
@@ -285,7 +285,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
-                <Loader dataSource = {loader} idChecker = {idChecker} />
+                <Loader idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
@@ -318,7 +318,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
-                <Loader dataSource = {loader} idChecker = {idChecker} />
+                <Loader idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
