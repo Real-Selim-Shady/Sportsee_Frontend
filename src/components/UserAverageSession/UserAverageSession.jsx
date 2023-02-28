@@ -106,7 +106,7 @@ function UserAverageSession (props) {
                     dataKey='day'
                     padding={{ left: -17, right: -17 }}
                     stroke='transparent'
-                    axisLine={false} 
+                    axisLine={false}
                     tick={{ fill: "rgba(255, 255, 255, 0.5)" }}
                     tickSize='15'
                     tickFormatter={(day) => dayAbbreviations[day]}

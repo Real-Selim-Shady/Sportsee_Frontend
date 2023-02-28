@@ -8,7 +8,9 @@ import UserPerf from "../../components/UserPerf/UserPerf";
 import UserScore from "../../components/UserScore/UserScore";
 import UserWeightCal from "../../components/UserWeightCal/UserWeightCal";
 import UserWelcome from "../../components/UserWelcome/UserWelcome";
+import Loader from "../../components/Loader/Loader";
 import Error from "../Error/Error";
+import mokedData from "../../mock/data.js";
 import { Routes, Route } from "react-router-dom";
 import { getAPIUserPerformance, getAPIUserActivity, getAPIUserAverageSession, getAPIUserMainData } from "../../services/ApiCalls";
 import PropTypes from "prop-types";
@@ -34,6 +36,8 @@ function App() {
   const [fetchActivity, setFetchActivity] = useState();
   const [fetchAverageSession, setAverageSession] = useState();
   const [idChecker, setIdChecker] = useState(-1);
+  const [loader, setLoader] = useState("on");
+  const [mockedData, setMockedData] = useState();
 
   /**
   * @description this useEffect use setter to change all file states
@@ -44,6 +48,9 @@ function App() {
     * @description if the id is found, it is used to retrieve the right data via a fetch
     */
     if (currentId) {
+
+      setMockedData(mokedData);
+
       getAPIUserPerformance(currentId)
         .then((data) => setFetchPerf(data))
         .catch(() => setIdChecker(0));
@@ -69,6 +76,15 @@ function App() {
     }
   }, [currentId]);
 
+  let dataChosen = {};
+
+  if(idChecker == 12){
+    dataChosen = 0;
+  }else if(idChecker == 18) {
+    dataChosen = 1;
+  }
+
+
   return (
     <Routes>
       {currentId ? (
@@ -89,6 +105,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
+                <Loader dataSource = {loader} idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
@@ -137,6 +154,7 @@ function App() {
                 </nav>
                 <p className='copyright'>Copyright, SportSee 2020</p>
               </aside>
+              <Loader dataSource = {loader} idChecker = {idChecker} />
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
@@ -164,6 +182,7 @@ function App() {
                 </nav>
                 <p className='copyright'>Copyright, SportSee 2020</p>
               </aside>
+              <Loader dataSource = {loader} idChecker = {idChecker} />
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
@@ -191,6 +210,7 @@ function App() {
                 </nav>
                 <p className='copyright'>Copyright, SportSee 2020</p>
               </aside>
+              <Loader dataSource = {loader} idChecker = {idChecker} />
               <div className='main-content'>
                 <section className='center-content'>
                   <div>
@@ -218,6 +238,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
+                <Loader dataSource = {loader} idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
@@ -255,6 +276,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
+                <Loader dataSource = {loader} idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>
@@ -287,6 +309,7 @@ function App() {
                   </nav>
                   <p className='copyright'>Copyright, SportSee 2020</p>
                 </aside>
+                <Loader dataSource = {loader} idChecker = {idChecker} />
                 <div className='main-content'>
                   <section className='center-content'>
                     <div>

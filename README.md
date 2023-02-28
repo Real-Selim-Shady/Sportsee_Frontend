@@ -28,3 +28,14 @@ Inside, clone the two following folders:
 - Have an overview on users' charts using : http://localhost:3001/user/id
 - Have a specific view on users' chart using : http://localhost:3001/user/id/performance, http://localhost:3001/user/id/activity, http://localhost:3001/user/id/average-sessions or http://localhost:3001/user/id/score 
 
+6. `Using MockedData`
+
+In order to use mockedData instead of APIs' data, follow these steps:
+- go to app.jsx file, which can be found in: src/Home/app.jsx
+- replace following information:
+    - dataSource = {fetchMain} -> dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]}
+    - dataSource = {fetchActivity} -> dataSource = {mockedData?.USER_ACTIVITY[dataChosen]}
+    - dataSource = {fetchAverageSession} -> dataSource = {mockedData?.USER_AVERAGE_SESSIONS[dataChosen]}
+    - dataSource = {fetchPerf} -> dataSource = {mockedData?.USER_PERFORMANCE[dataChosen]}
+- to replace them quickly and safely, you can use on your keybord the combo Control + H or Command + H (depending on your keyboard), put on search the text you want to change, put on replace the text you want to enter instead
+

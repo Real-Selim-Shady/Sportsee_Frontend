@@ -18,6 +18,7 @@ function UserPerf (props) {
     const getData = props.dataSource;
     const getIdChecker = props.idChecker;
 
+
     /**
      * @description The userData state that stores the user's session data
      * @type {Array}

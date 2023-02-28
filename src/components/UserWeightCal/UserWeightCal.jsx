@@ -165,7 +165,6 @@ function UserWeightCal (props) {
         </div>
         );
     }
-
 }
 
 UserWeightCal.propTypes = {
