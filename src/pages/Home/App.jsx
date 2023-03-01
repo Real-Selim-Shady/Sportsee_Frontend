@@ -12,7 +12,7 @@ import Loader from "../../components/Loader/Loader";
 import Error from "../Error/Error";
 import mokedData from "../../mock/data.js";
 import { Routes, Route } from "react-router-dom";
-import { getAPIUserPerformance, getAPIUserActivity, getAPIUserAverageSession, getAPIUserMainData } from "../../services/ApiCalls";
+import DataModel from "../../services/ApiCalls.jsx";
 import PropTypes from "prop-types";
 
 /**
@@ -30,6 +30,8 @@ function App() {
   const url = window.location.href;
   const match = url.match(/user\/(\d+)/);
   const currentId = match ? match[1] : null;
+  
+  const dataModel = new DataModel();
 
   const [fetchPerf, setFetchPerf] = useState();
   const [fetchMain, setFetchMain] = useState();
@@ -38,7 +40,7 @@ function App() {
   const [idChecker, setIdChecker] = useState(-1);
 
   /**
-   * @description erase "//" on line 43 if you want to use mockedData
+   * @description erase "//" on line 45 if you want to use mockedData
    */
   //const [mockedData, setMockedData] = useState();
 
@@ -53,32 +55,32 @@ function App() {
     if (currentId) {
 
       /**
-       * @description erase "//" on line 58 if you want to use mockedData
+       * @description erase "//" on line 60 if you want to use mockedData
        */
       //setMockedData(mokedData); 
 
-      getAPIUserPerformance(currentId)
+      dataModel.getAPIUserPerformance(currentId)
         .then((data) => setFetchPerf(data))
         .catch(() => setIdChecker(0));
 
-      getAPIUserMainData(currentId)
+      dataModel.getAPIUserMainData(currentId)
         .then((data) => setFetchMain(data))
         .catch(() => setIdChecker(0));
 
-      getAPIUserActivity(currentId)
+      dataModel.getAPIUserActivity(currentId)
         .then((data) => setFetchActivity(data))
         .catch(() => setIdChecker(0));
 
-      getAPIUserAverageSession(currentId)
+      dataModel.getAPIUserAverageSession(currentId)
         .then((data) => setAverageSession(data))
         .catch(() => setIdChecker(0));
 
       /**
         * @description this API call is used to check is the id is existing in data or not
         */
-      getAPIUserPerformance(currentId)
-      .then((data) => setIdChecker(data.userId))
-      .catch(() => setIdChecker(0));
+      dataModel.getAPIUserPerformance(currentId)
+        .then((data) => setIdChecker(data.userId))
+        .catch(() => setIdChecker(0));
     }
   }, [currentId]);
 
