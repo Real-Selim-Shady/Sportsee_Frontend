@@ -22,7 +22,6 @@ function UserWelcome (props) {
    */
   const [userData, setUserData] = useState();
 
-
     /**
      * @description The useEffect hook that sets the userData state to the data from the data source
      * userData is a state that receives its data via setUserData

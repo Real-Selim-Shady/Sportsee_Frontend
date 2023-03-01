@@ -32,7 +32,7 @@ Inside, clone the two following folders:
 
 In order to use mockedData instead of APIs' data, follow these steps:
 - step 1 : open app.jsx file, which can be found in: src/Home/app.jsx
-- step 2 : on line 48, change the const choseMockData value from "no" to "yes". It is a string.
+- step 2 : on line 38, change the const choseMockData value from "no" to "yes". It is a string.
 
 If you want to come back to API data, change the const choseMockData value from "yes" to "no". It is a string.
 
