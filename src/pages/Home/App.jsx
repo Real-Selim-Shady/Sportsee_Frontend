@@ -38,11 +38,15 @@ function App() {
   const [fetchActivity, setFetchActivity] = useState();
   const [fetchAverageSession, setAverageSession] = useState();
   const [idChecker, setIdChecker] = useState(-1);
+  const [mockedData, setMockedData] = useState();
+
 
   /**
-   * @description erase "//" on line 45 if you want to use mockedData
+   * @description if you want to use mock data, change the const choseMockData value from "no" into "yes", it is a string
+   * after using mock data, if you want to come back to API data, change "yes" value to "no"
    */
-  //const [mockedData, setMockedData] = useState();
+  const choseMockData = "no";
+
 
   /**
     * @description this useEffect use setter to change all file states
@@ -54,10 +58,7 @@ function App() {
       */
     if (currentId) {
 
-      /**
-       * @description erase "//" on line 60 if you want to use mockedData
-       */
-      //setMockedData(mokedData); 
+      setMockedData(mokedData); 
 
       dataModel.getAPIUserPerformance(currentId)
         .then((data) => setFetchPerf(data))
@@ -95,310 +96,618 @@ function App() {
     dataChosen = 1;
   }
 
-
-  return (
-    <Routes>
-      {currentId ? (
-        <>
-          <Route path='/user/:id' element={
-            <div className='App'>
-              <header className='App-header'>
-                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-              </header>
-              <main>
-                <aside className='left-side'>
-                  <nav className='left-list'>
-                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                  </nav>
-                  <p className='copyright'>Copyright, SportSee 2020</p>
-                </aside>
-                <Loader idChecker = {idChecker} />
-                <div className='main-content'>
-                  <section className='center-content'>
-                    <div>
-                      <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
-                    </div>
-                    <div className='first-chart'>
-                      <section>
-                        <UserWeightCal dataSource = {fetchActivity} idChecker = {idChecker} />
-                      </section>
-                    </div>
-                    <div className='bottom-content'>
-                      <section>
-                        <UserAverageSession dataSource = {fetchAverageSession} idChecker = {idChecker} />
-                      </section>
-                      <section>
-                        <UserPerf dataSource = {fetchPerf} idChecker = {idChecker} />
-                      </section>
-                      <section>
-                        <UserScore dataSource = {fetchMain} idChecker = {idChecker} />
-                      </section>
-                    </div>
-                  </section>
-                  <aside>
-                    <section>
-                      <UserConsume dataSource = {fetchMain} idChecker = {idChecker} />
-                    </section>
+  if(choseMockData === "no"){
+    return (
+      <Routes>
+        {currentId ? (
+          <>
+            <Route path='/user/:id' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
                   </aside>
-                </div>
-              </main>
-            </div>
-          } />
-
-          <Route path='/user/404/Error' element={
-            <div className='App'>
-            <header className='App-header'>
-              <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-              <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-            </header>
-            <main>
-              <aside className='left-side'>
-                <nav className='left-list'>
-                  <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                  <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                  <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                  <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                </nav>
-                <p className='copyright'>Copyright, SportSee 2020</p>
-              </aside>
-              <Loader idChecker = {idChecker} />
-              <div className='main-content'>
-                <section className='center-content'>
-                  <div>
-                    <Error />
-                  </div>
-                </section>
-              </div>
-            </main>
-          </div>
-          } />
-
-          <Route path='/*' element={
-            <div className='App'>
-            <header className='App-header'>
-              <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-              <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-            </header>
-            <main>
-              <aside className='left-side'>
-                <nav className='left-list'>
-                  <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                  <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                  <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                  <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                </nav>
-                <p className='copyright'>Copyright, SportSee 2020</p>
-              </aside>
-              <Loader idChecker = {idChecker} />
-              <div className='main-content'>
-                <section className='center-content'>
-                  <div>
-                    <Error />
-                  </div>
-                </section>
-              </div>
-            </main>
-          </div>
-          } />
-
-          <Route path='/user/:id' element={
-            <div className='App'>
-            <header className='App-header'>
-              <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-              <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-            </header>
-            <main>
-              <aside className='left-side'>
-                <nav className='left-list'>
-                  <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                  <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                  <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                  <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                </nav>
-                <p className='copyright'>Copyright, SportSee 2020</p>
-              </aside>
-              <Loader idChecker = {idChecker} />
-              <div className='main-content'>
-                <section className='center-content'>
-                  <div>
-                    <Error />
-                  </div>
-                </section>
-              </div>
-            </main>
-          </div>
-          } />
-
-          <Route path='/user/:id/activity' element={
-            <div className='App'>
-              <header className='App-header'>
-                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-              </header>
-              <main>
-                <aside className='left-side'>
-                  <nav className='left-list'>
-                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                  </nav>
-                  <p className='copyright'>Copyright, SportSee 2020</p>
-                </aside>
-                <Loader idChecker = {idChecker} />
-                <div className='main-content'>
-                  <section className='center-content'>
-                    <div>
-                      <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
-                    </div>
-                    <div className='first-chart'>
-                      <section>
-                        <UserWeightCal dataSource = {fetchActivity} idChecker = {idChecker} />
-                      </section>
-                    </div>
-                  </section>
-                  <aside>
-                    <section>
-                      <UserConsume dataSource = {fetchMain} idChecker = {idChecker} />
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
+                      </div>
+                      <div className='first-chart'>
+                        <section>
+                          <UserWeightCal dataSource = {fetchActivity} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserAverageSession dataSource = {fetchAverageSession} idChecker = {idChecker} />
+                        </section>
+                        <section>
+                          <UserPerf dataSource = {fetchPerf} idChecker = {idChecker} />
+                        </section>
+                        <section>
+                          <UserScore dataSource = {fetchMain} idChecker = {idChecker} />
+                        </section>
+                      </div>
                     </section>
-                  </aside>
-                </div>
-              </main>
-            </div>
-          } />
-
-          <Route path='/user/:id/performance' element={
-            <div className='App'>
-              <header className='App-header'>
-                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-              </header>
-              <main>
-                <aside className='left-side'>
-                  <nav className='left-list'>
-                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                  </nav>
-                  <p className='copyright'>Copyright, SportSee 2020</p>
-                </aside>
-                <Loader idChecker = {idChecker} />
-                <div className='main-content'>
-                  <section className='center-content'>
-                    <div>
-                      <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
-                    </div>
-                    <div className='bottom-content'>
+                    <aside>
                       <section>
-                        <UserPerf dataSource = {fetchPerf} idChecker = {idChecker} />
+                        <UserConsume dataSource = {fetchMain} idChecker = {idChecker} />
                       </section>
-                    </div>
-                  </section>
-                </div>
-              </main>
-            </div>
-          } />
-
-          <Route path='/user/:id/average-sessions' element={
-            <div className='App'>
-              <header className='App-header'>
-                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-              </header>
-              <main>
-                <aside className='left-side'>
-                  <nav className='left-list'>
-                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                  </nav>
-                  <p className='copyright'>Copyright, SportSee 2020</p>
-                </aside>
-                <Loader idChecker = {idChecker} />
-                <div className='main-content'>
-                  <section className='center-content'>
-                    <div>
-                      <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
-                    </div>
-                    <div className='bottom-content'>
-                      <section>
-                        <UserAverageSession dataSource = {fetchAverageSession} idChecker = {idChecker} />
-                      </section>
-                    </div>
-                  </section>
-                </div>
-              </main>
-            </div>
-          } />
-
-          <Route path='/user/:id/score' element={
-            <div className='App'>
-              <header className='App-header'>
-                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-              </header>
-              <main>
-                <aside className='left-side'>
-                  <nav className='left-list'>
-                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                  </nav>
-                  <p className='copyright'>Copyright, SportSee 2020</p>
-                </aside>
-                <div className='main-content'>
-                  <section className='center-content'>
-                    <div>
-                      <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
-                    </div>
-                    <div className='bottom-content'>
-                      <section>
-                        <UserScore dataSource = {fetchMain} idChecker = {idChecker} />
-                      </section>
-                    </div>
-                  </section>
-                </div>
-              </main>
-            </div>
-          } />
-        </>):
-        <>
-          <Route path='/*' element={
-            <div className='App'>
-            <header className='App-header'>
-              <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
-              <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
-            </header>
-            <main>
-              <aside className='left-side'>
-                <nav className='left-list'>
-                  <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
-                  <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
-                  <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
-                  <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
-                </nav>
-                <p className='copyright'>Copyright, SportSee 2020</p>
-              </aside>
-              <div className='main-content'>
-                <section className='center-content'>
-                  <div>
-                    <Error />
+                    </aside>
                   </div>
-                </section>
+                </main>
               </div>
-            </main>
-          </div>
-          } />
-        </>}
-      </Routes>
-  );
+            } />
+
+            <Route path='/user/404/Error' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <Loader idChecker = {idChecker} />
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+
+            <Route path='/*' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <Loader idChecker = {idChecker} />
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+
+            <Route path='/user/:id' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <Loader idChecker = {idChecker} />
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+
+            <Route path='/user/:id/activity' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
+                      </div>
+                      <div className='first-chart'>
+                        <section>
+                          <UserWeightCal dataSource = {fetchActivity} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                    <aside>
+                      <section>
+                        <UserConsume dataSource = {fetchMain} idChecker = {idChecker} />
+                      </section>
+                    </aside>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/:id/performance' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserPerf dataSource = {fetchPerf} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/:id/average-sessions' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserAverageSession dataSource = {fetchAverageSession} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/:id/score' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {fetchMain} idChecker = {idChecker} />
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserScore dataSource = {fetchMain} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            } />
+          </>):
+          <>
+            <Route path='/*' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+          </>}
+        </Routes>
+    );}else{
+      return(
+      <Routes>
+        {currentId ? (
+          <>
+            <Route path='/user/:id' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </div>
+                      <div className='first-chart'>
+                        <section>
+                          <UserWeightCal dataSource = {mockedData?.USER_ACTIVITY[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserAverageSession dataSource = {mockedData?.USER_AVERAGE_SESSIONS[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                        <section>
+                          <UserPerf dataSource = {mockedData?.USER_PERFORMANCE[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                        <section>
+                          <UserScore dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                    <aside>
+                      <section>
+                        <UserConsume dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </section>
+                    </aside>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/404/Error' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <Loader idChecker = {idChecker} />
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+
+            <Route path='/*' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <Loader idChecker = {idChecker} />
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+
+            <Route path='/user/:id' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <Loader idChecker = {idChecker} />
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+
+            <Route path='/user/:id/activity' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </div>
+                      <div className='first-chart'>
+                        <section>
+                          <UserWeightCal dataSource = {mockedData?.USER_ACTIVITY[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                    <aside>
+                      <section>
+                        <UserConsume dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </section>
+                    </aside>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/:id/performance' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserPerf dataSource = {mockedData?.USER_PERFORMANCE[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/:id/average-sessions' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <Loader idChecker = {idChecker} />
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserAverageSession dataSource = {mockedData?.USER_AVERAGE_SESSIONS[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            } />
+
+            <Route path='/user/:id/score' element={
+              <div className='App'>
+                <header className='App-header'>
+                  <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                  <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+                </header>
+                <main>
+                  <aside className='left-side'>
+                    <nav className='left-list'>
+                      <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                      <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                      <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                      <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                    </nav>
+                    <p className='copyright'>Copyright, SportSee 2020</p>
+                  </aside>
+                  <div className='main-content'>
+                    <section className='center-content'>
+                      <div>
+                        <UserWelcome dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                      </div>
+                      <div className='bottom-content'>
+                        <section>
+                          <UserScore dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]} idChecker = {idChecker} />
+                        </section>
+                      </div>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            } />
+          </>):
+          <>
+            <Route path='/*' element={
+              <div className='App'>
+              <header className='App-header'>
+                <img className='logo' src='https://i.ibb.co/275btmt/logo.png' alt='logo Sportsee'></img>
+                <nav className='header-titles'><p>Accueil</p><p>Profil</p><p>Réglage</p><p>Communauté</p></nav>
+              </header>
+              <main>
+                <aside className='left-side'>
+                  <nav className='left-list'>
+                    <img className='left-icon' src='https://i.ibb.co/cydBcvc/icon-Yoga.png' alt='icon de yoga'></img>
+                    <img className='left-icon' src='https://i.ibb.co/Yk0cV2S/icon-Natation.png' alt='icon de natation'></img>
+                    <img className='left-icon' src='https://i.ibb.co/bgrC0cb/icon-Velo.png' alt='icon de vélo'></img>
+                    <img className='left-icon' src='https://i.ibb.co/28MPpPZ/icon-Muscul.png' alt='icon de musculation'></img>
+                  </nav>
+                  <p className='copyright'>Copyright, SportSee 2020</p>
+                </aside>
+                <div className='main-content'>
+                  <section className='center-content'>
+                    <div>
+                      <Error />
+                    </div>
+                  </section>
+                </div>
+              </main>
+            </div>
+            } />
+          </>}
+        </Routes>
+    );
+    }
+
+
+
+
 }
 
 export default App;

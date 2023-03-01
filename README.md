@@ -32,12 +32,7 @@ Inside, clone the two following folders:
 
 In order to use mockedData instead of APIs' data, follow these steps:
 - step 1 : open app.jsx file, which can be found in: src/Home/app.jsx
-- step 2 : erase "//" on lines 45 and 60, which will transform those lines from comment to usable code
-- step 3 : replace following information:
-        - dataSource = {fetchMain} --> dataSource = {mockedData?.USER_MAIN_DATA[dataChosen]}
-        - dataSource = {fetchActivity} --> dataSource = {mockedData?.USER_ACTIVITY[dataChosen]}
-        - dataSource = {fetchAverageSession} --> dataSource = {mockedData?.USER_AVERAGE_SESSIONS[dataChosen]}
-        - dataSource = {fetchPerf} --> dataSource = {mockedData?.USER_PERFORMANCE[dataChosen]}
-    - to replace them quickly and safely, you can use on your keybord the combo Control + H or Command + H (depending on your keyboard), put on search the text you want to change, put on replace the text you want to enter instead
-    - you can chose to work with a part of APIs' data and mockedData, if you select which dataSource you really want to replace instead of replacing them all
+- step 2 : on line 48, change the const choseMockData value from "no" to "yes". It is a string.
+
+If you want to come back to API data, change the const choseMockData value from "yes" to "no". It is a string.
 
